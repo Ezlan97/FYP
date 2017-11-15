@@ -26,7 +26,13 @@ Route::get('/', function () {
 	}
 });
 
+route::get('/dashboard', function() { return view('admin/dashboard'); });
+
+Route::get('/calender', function() { return view('/calender'); });
+
 Route::auth();
+
+Route::resource('events', 'EventsController',['only' => ['index', 'store', 'update', 'destroy']]);
 
 //Public
 Route::post('register', [

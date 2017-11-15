@@ -1,113 +1,95 @@
-@extends('layouts.master')
-
-@section('head')
-
-@stop
-
-@section('title')
-    Dashboard
-@stop
-
-@section('breadcrumb')
-    <li>
-        <i class="fa fa-home"></i>
-        <a href="">Home</a>
-        <i class="fa fa-angle-right"></i>
-    </li>
-    <li>
-        <a href="#">Dashboard</a>
-    </li>
-@stop
+@extends('layouts.app')
+@section('content')
 
 @section('content')
-	<div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
-                <div class="visual">
-                    <i class="fa fa-car"></i>
-                </div>
-                <div class="details">
-                    <div class="number">
-                        <span data-counter="counterup" data-value="">{{ count($vehicles) }}</span>
-                    </div>
-                    <div class="desc"> Total Vehicle </div>
-                </div>
-            </a>
+
+ <header class="masthead">
+      <div class="overlay">
+        <div class="container">
+          <h1 class="display-1 text-white">Welcome {{ Auth::user()->name }} </h1>
+          <h2 class="display-4 text-white">KUIS Transportation Booking System</h2>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <a class="dashboard-stat dashboard-stat-v2 green" href="#">
-                <div class="visual">
-                    <i class="fa fa-check"></i>
-                </div>
-                <div class="details">
-                    <div class="number">
-                        <span data-counter="counterup" data-value="">{{ count($approved) }}</span></div>
-                    <div class="desc"> Approved Booking </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <a class="dashboard-stat dashboard-stat-v2 red" href="#">
-                <div class="visual">
-                    <i class="fa fa-close"></i>
-                </div>
-                <div class="details">
-                    <div class="number">
-                        <span data-counter="counterup" data-value="">{{ count($rejected) }}</span>
-                    </div>
-                    <div class="desc"> Rejected Booking </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <a class="dashboard-stat dashboard-stat-v2 grey" href="#">
-                <div class="visual">
-                    <i class="fa fa-users"></i>
-                </div>
-                <div class="details">
-                    <div class="number">
-                        <span data-counter="counterup" data-value="">{{ count($pending) }}</span></div>
-                    <div class="desc"> Pending Booking </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <a class="dashboard-stat dashboard-stat-v2 blue-madison" href="{{ route('admin.manage-user') }}">
-                <div class="visual">
-                    <i class="fa fa-users"></i>
-                </div>
-                <div class="details">
-                    <div class="number">
-                        <span data-counter="counterup" data-value="89"></div>
-                    <div class="desc"> Goto Users Management </div>
-                </div>
-            </a>
-        </div>
-         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <a class="dashboard-stat dashboard-stat-v2 green-jungle" href="{{ route('admin.manage-vehicle') }}">
-                <div class="visual">
-                    <i class="fa fa-car"></i>
-                </div>
-                <div class="details">
-                    <div class="number">
-                        <span data-counter="counterup" data-value="89"></div>
-                    <div class="desc"> Goto Vehicle Management</div>
-                </div>
-            </a>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <a class="dashboard-stat dashboard-stat-v2 yellow" href="{{ route('admin.manage-booking') }}">
-                <div class="visual">
-                    <i class="fa fa-list"></i>
-                </div>
-                <div class="details">
-                    <div class="number">
-                        <span data-counter="counterup" data-value="89"></div>
-                    <div class="desc"> Goto Booking Management</div>
-                </div>
-            </a>
-        </div>
-    </div>
+      </div>
+</header>
+
+
+<div class="container">
+    <h1 class="my-4 text-center">Current Status</h1>
+    <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+        <div class="alert alert-primary" role="alert">
+          <h4 class="alert-heading text-center">Total Vehicle</h4>
+          <hr>
+          <p class="mb-0 text-center"><span data-counter="counterup" data-value="">{{ count($vehicles) }}</span></p>
+      </div>
+      </div> 
+       <div class="col-lg-3 col-md-6 mb-4">
+        <div class="alert alert-success" role="alert">
+          <h4 class="alert-heading text-center">Approved Booking</h4>
+          <hr>
+          <p class="mb-0 text-center"><span data-counter="counterup" data-value="">{{ count($approved) }}</span></p>
+      </div>
+      </div>  
+       <div class="col-lg-3 col-md-6 mb-4">
+        <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading text-center">Rejected Booking</h4>
+          <hr>
+          <p class="mb-0 text-center"><span data-counter="counterup" data-value="">{{ count($rejected) }}</span></p>
+      </div>
+      </div>  
+       <div class="col-lg-3 col-md-6 mb-4">
+        <div class="alert alert-warning" role="alert">
+          <h4 class="alert-heading text-center">Pending Booking</h4>
+          <hr>
+          <p class="mb-0 text-center"><span data-counter="counterup" data-value="">{{ count($pending) }}</span></p>
+      </div>
+      </div>     
+  </div>
+</div>
+
+
+<div class="container">
+
+  <h1 class="my-4 text-center">Manage</h1>
+
+  <!-- Marketing Icons Section -->
+  <div class="row text-center">
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100">
+        <h4 class="card-header">User Management</h4>
+        <div class="card-body">
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+      </div>
+      <div class="card-footer">
+          <a href="{{ route('admin.manage-user') }}" class="btn btn-primary">Manage</a>
+      </div>
+  </div>
+</div>
+<div class="col-lg-4 mb-4">
+  <div class="card h-100">
+    <h4 class="card-header">Booking Management</h4>
+    <div class="card-body">
+      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
+  </div>
+  <div class="card-footer">
+      <a href="{{ route('admin.manage-booking') }}" class="btn btn-primary">Manage</a>
+  </div>
+</div>
+</div>
+<div class="col-lg-4 mb-4">
+  <div class="card h-100">
+    <h4 class="card-header">Vehicle Management</h4>
+    <div class="card-body">
+      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+  </div>
+  <div class="card-footer">
+      <a href="{{ route('admin.manage-vehicle') }}" class="btn btn-primary">Manage</a>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
 @stop
 
 @section('script')
@@ -115,16 +97,16 @@
 <script>
 	$(document).ready(function(){
        $('#checkall-checkbox').click(function(){
-            if(this.checked){
-                $('.checker').find('span').addClass('checked');
-                $("input.single-checkbox").prop('checked', true).show();
-            }
-            else{
-                $('.checker').find('span').removeClass('checked');
-                $("input.single-checkbox").prop('checked', false);
-            }
-       });
+        if(this.checked){
+            $('.checker').find('span').addClass('checked');
+            $("input.single-checkbox").prop('checked', true).show();
+        }
+        else{
+            $('.checker').find('span').removeClass('checked');
+            $("input.single-checkbox").prop('checked', false);
+        }
     });
+   });
 
 </script>
 
@@ -132,3 +114,4 @@
 @include('errors.validation-errors-script')
 
 @stop
+@endsection

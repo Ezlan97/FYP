@@ -113,12 +113,13 @@ class AdminController extends Controller
         return view('admin.manage-vehicle', compact('vehicles'));
     }
 
-    public function createVehicle(Request $request){
+    public function createVehicle(Request $request, Vehicle $input){
         //Get all send request and store into variable
-        $input = $request->all();
+
+        $input = Vehicle::create($request->all());
 
         //Create vehicle based on input 
-        $vehicle = vehicle::create($input);
+        $input->save();
 
         return redirect()->back()->with('create_message', 'Vehicle successfully created!');
     }

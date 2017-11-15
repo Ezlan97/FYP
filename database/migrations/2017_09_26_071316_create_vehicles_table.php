@@ -17,6 +17,9 @@ class CreateVehiclesTable extends Migration
             $table->string('model');
             $table->string('plate');
             $table->string('type');
+            $table->datetime('start');
+            $table->datetime('end');
+            $table->string('color', 7);
             $table->timestamps();
         });
     }

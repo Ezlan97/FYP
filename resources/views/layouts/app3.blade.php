@@ -40,22 +40,26 @@
   <link href="../../assets/frontend/onepage/css/themes/red.css" rel="stylesheet" id="style-color">
   <link href="../../assets/frontend/onepage/css/custom.css" rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/clockface/css/clockface.css') }}"/>
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-datepicker/css/datepicker3.css') }}"/>
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}"/>
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-colorpicker/css/colorpicker.css') }}"/>
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css') }}"/>
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/clockface/css/clockface.css') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-datepicker/css/datepicker3.css') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-colorpicker/css/colorpicker.css') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}"/>
+  {!! Html::style('vendor/seguce92/bootstrap/css/bootstrap.min.css') !!}
+  {!! Html::style('vendor/seguce92/fullcalendar/fullcalendar.min.css') !!}
+  {!! Html::style('vendor/seguce92/bootstrap-datetimepicker/css/bootstrap-material-datetimepicker.css') !!}
+  {!! Html::style('vendor/seguce92/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') !!}
   <!-- Theme styles END -->
 
   <style type="text/css">
-    .datepicker.dropdown-menu {
-      z-index: 10000 !important;
-    }
-    .bg1 {
-      background-color: blue;
-    }
-  </style>
+  .datepicker.dropdown-menu {
+    z-index: 10000 !important;
+  }
+  .bg1 {
+    background-color: blue;
+  }
+</style>
 </head>
 <!--DOC: menu-always-on-top class to the body element to set menu on top -->
 <body>
@@ -154,53 +158,53 @@
 </div>
 </div>
 <!-- Promo block END -->
-  
-  <!-- BEGIN PRE-FOOTER -->
-  <div class="pre-footer" id="check-date">
-    <div class="container">
-      <div class="row">
-        @yield('content')
-      
-      </div>
-      <!-- END BOTTOM ABOUT BLOCK -->
-    </div>
-<!-- BEGIN FOOTER -->
-<div class="footer">
+
+<!-- BEGIN PRE-FOOTER -->
+<div class="pre-footer" id="check-date">
   <div class="container">
     <div class="row">
-      <!-- BEGIN COPYRIGHT -->
-      <div class="col-md-12 text-center">
-        <div class="copyright">2017 © Ahda. ALL Rights Reserved.</div>
+      @yield('content')
+      
+    </div>
+    <!-- END BOTTOM ABOUT BLOCK -->
+  </div>
+  <!-- BEGIN FOOTER -->
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <!-- BEGIN COPYRIGHT -->
+        <div class="col-md-12 text-center">
+          <div class="copyright">2017 © Ahda. ALL Rights Reserved.</div>
+        </div>
+        <!-- END COPYRIGHT -->
       </div>
-      <!-- END COPYRIGHT -->
     </div>
   </div>
-</div>
-<!-- END FOOTER -->
+  <!-- END FOOTER -->
   <a href="#promo-block" class="go2top scroll"><i class="fa fa-arrow-up"></i></a>
   <!--[if lt IE 9]>
   <script src="../../assets/global/plugins/respond.min.js"></script>
-  <![endif]-->
-  <!-- Load JavaScripts at the bottom, because it will reduce page load time -->
-  <!-- Core plugins BEGIN (For ALL pages) -->
-  <script src="../../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-  <script src="../../assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-  <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-  <!-- Core plugins END (For ALL pages) -->
-  <!-- BEGIN RevolutionSlider -->
-  <script src="../../assets/global/plugins/slider-revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js" type="text/javascript"></script>
-  <script src="../../assets/global/plugins/slider-revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js" type="text/javascript"></script>
-  <script src="../../assets/frontend/onepage/scripts/revo-ini.js" type="text/javascript"></script> 
-  <!-- END RevolutionSlider -->
-  <!-- Core plugins BEGIN (required only for current page) -->
-  <script src="../../assets/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
-  <script src="../../assets/global/plugins/jquery.easing.js"></script>
-  <script src="../../assets/global/plugins/jquery.parallax.js"></script>
-  <script src="../../assets/global/plugins/jquery.scrollTo.min.js"></script>
-  <script src="../../assets/frontend/onepage/scripts/jquery.nav.js"></script>
-  <!-- Core plugins END (required only for current page) -->
-  <!-- Global js BEGIN -->
-  <script src="../../assets/frontend/onepage/scripts/layout.js" type="text/javascript"></script>
+<![endif]-->
+<!-- Load JavaScripts at the bottom, because it will reduce page load time -->
+<!-- Core plugins BEGIN (For ALL pages) -->
+<script src="../../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="../../assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- Core plugins END (For ALL pages) -->
+<!-- BEGIN RevolutionSlider -->
+<script src="../../assets/global/plugins/slider-revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js" type="text/javascript"></script>
+<script src="../../assets/global/plugins/slider-revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js" type="text/javascript"></script>
+<script src="../../assets/frontend/onepage/scripts/revo-ini.js" type="text/javascript"></script> 
+<!-- END RevolutionSlider -->
+<!-- Core plugins BEGIN (required only for current page) -->
+<script src="../../assets/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+<script src="../../assets/global/plugins/jquery.easing.js"></script>
+<script src="../../assets/global/plugins/jquery.parallax.js"></script>
+<script src="../../assets/global/plugins/jquery.scrollTo.min.js"></script>
+<script src="../../assets/frontend/onepage/scripts/jquery.nav.js"></script>
+<!-- Core plugins END (required only for current page) -->
+<!-- Global js BEGIN -->
+<script src="../../assets/frontend/onepage/scripts/layout.js" type="text/javascript"></script>
 
 <script src="/../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
 <script src="/../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -225,22 +229,104 @@
 <script src="/../assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
 <script src="/../assets/admin/pages/scripts/components-pickers.js"></script>
 
-  <script>
-    $(document).ready(function() {
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+
+{!! Html::script('vendor/seguce92/jquery.min.js') !!}
+{!! Html::script('vendor/seguce92/bootstrap/js/bootstrap.min.js') !!}
+{!! Html::script('vendor/seguce92/fullcalendar/lib/moment.min.js') !!}
+{!! Html::script('vendor/seguce92/fullcalendar/fullcalendar.min.js') !!}
+{!! Html::script('vendor/seguce92/bootstrap-datetimepicker/js/bootstrap-material-datetimepicker.js') !!}
+{!! Html::script('vendor/seguce92/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') !!}
+
+<script>
+  $(document).ready(function() {
           Metronic.init(); // init metronic core components
           Layout.init(); // init current layout
           QuickSidebar.init(); // init quick sidebar
           Demo.init(); // init demo features
           ComponentsPickers.init();
-    });
+        });
 
-    $(document).ready(function () {
+  $(document).ready(function () {
         // Handler for .ready() called.
         $('html, body').animate({
-            scrollTop: $('#check-date').offset().top
+          scrollTop: $('#check-date').offset().top
         }, 'slow');
-    });
-  </script>
-  <!-- Global js END -->
-</body>
-</html>
+      });
+
+var BASEURL = "{{ url('/') }}";
+        $(document).ready(function() {
+
+        $('#calendar').fullCalendar({
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,basicWeek,basicDay'
+          },
+          navLinks: true, // can click day/week names to navigate views
+          editable: true,
+                selectable: true,
+                selectHelper: true,
+
+                select: function(start){
+                    start = moment(start.format());
+                    $('#date_start').val(start.format('YYYY-MM-DD'));
+                    $('#responsive-modal').modal('show');
+                },
+
+          events: BASEURL + '/events',
+
+                eventClick: function(event, jsEvent, view){
+                    var date_start = $.fullCalendar.moment(event.start).format('YYYY-MM-DD');
+                    var time_start = $.fullCalendar.moment(event.start).format('hh:mm:ss');
+                    var date_end = $.fullCalendar.moment(event.end).format('YYYY-MM-DD hh:mm:ss');
+                    $('#modal-event #delete').attr('data-id', event.id);
+                    $('#modal-event #_title').val(event.title);
+                    $('#modal-event #_date_start').val(date_start);
+                    $('#modal-event #_time_start').val(time_start);
+                    $('#modal-event #_date_end').val(date_end);
+                    $('#modal-event #_color').val(event.color);
+                    $('#modal-event').modal('show');
+                }
+        });
+
+      });
+
+        $('.colorpicker').colorpicker();
+
+        $('#time_start').bootstrapMaterialDatePicker({
+            date: false,
+            shortTime: false,
+            format: 'HH:mm:ss'
+        });
+
+        $('#date_end').bootstrapMaterialDatePicker({
+            date: true,
+            shortTime: false,
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
+
+        $('#delete').on('click', function(){
+            var x = $(this);
+            var delete_url = x.attr('data-href')+'/'+x.attr('data-id');
+
+            $.ajax({
+                url: delete_url,
+                type: 'PATCH',
+                success: function(result){
+                    $('#modal-event').modal('hide');
+                    alert(result.message);
+                },
+                error: function(result){
+                    $('#modal-event').modal('hide');
+                    alert(result.message);
+                }
+            });
+        });
+  
+    </script>
+    <!-- Global js END -->
+  </body>
+  </html>
