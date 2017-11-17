@@ -22,12 +22,12 @@
                     <!-- BEGIN LOGIN FORM -->
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email">E-Mail Address</label>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-                            @if ($errors->has('email'))
+                        <div class="form-group{{ $errors->has('matrik') ? ' has-error' : '' }}">
+                            <label for="matrik" class="control-label">Staff/Matrik ID</label>
+                            <input id="matrik" type="id" class="form-control" name="matrik" value="{{ old('matrik') }}" required autofocus>
+                            @if ($errors->has('matrik'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('email') }}</strong>
+                                <strong>{{ $errors->first('matrik') }}</strong>
                             </span>
                             @endif
                         </div>

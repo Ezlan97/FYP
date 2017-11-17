@@ -34,6 +34,14 @@
                             <input class="form-control " type="text" autocomplete="off" placeholder="Staff/Matrics No." name="matrik" value="{{ old('matrik') }}" required/>
                         </div>
                         <div class="form-group">
+                            <label class="control-label">Position</label>
+                            <select class="form-control" name="position">
+                                <option value="" disabled selected>Select</option>
+                                <option value="Student">Student</option>
+                                <option value="Lecture">Lecture</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label class="control-label visible-ie8 visible-ie9">Faculty</label>
                             <select class="form-control" name="faculty" required>
                                 <option value="" disabled selected>Faculty</option>
