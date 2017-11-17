@@ -17,8 +17,8 @@ class CreateBookingHistoriesTable extends Migration
             $table->integer('user_id');
             $table->integer('car_id')->nullable();
             $table->integer('attachment_id');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->datetime('start_date');
+            $table->datetime('end_date');
             $table->integer('approval')->default(0)->comment = "0. Pending, 1. Approved 2. Reject";
             $table->string('destination');
             $table->integer('total_passenger')->default(1);

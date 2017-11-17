@@ -1,35 +1,19 @@
 @extends('layouts.master')
-
 @section('head')
-
 @stop
-
-@section('title')
-   Approve / Reject Booking 
-@stop
-
-@section('breadcrumb')
-    <li>
-        <i class="fa fa-home"></i>
-        <a href="">Home</a>
-        <i class="fa fa-angle-right"></i>
-    </li>
-    <li>
-        <a href="#">Approve / Reject Booking </a>
-    </li>
-@stop
-
 @section('content')
-<div class="row">
-	
-	<div class="col-md-12">
+<header class="masthead">
+	<div class="overlay">
+		<div class="container">
+			<h1 style="color: #ffffff; font-size: 60px;">Approve/Reject</h1>
+			<h2 class="display-4 text-white"></h2>
+		</div>
+	</div>
+</header>
+<div class="container-fluid" style="padding-top: 30px; padding-bottom: 30px;">
+	<div class="col-md-6 col-md-offset-3 well">
 		<!-- BEGIN BORDERED TABLE PORTLET-->
 	    <div class="portlet box blue-dark">
-	        <div class="portlet-title">
-	            <div class="caption">
-	                <span class="caption-subject font-white sbold uppercase">Approve / Reject Booking </span>
-	            </div>
-	        </div>
 	        <div class="portlet-body">
 		        <div class="row">
 		        	<div class="col-md-12">
@@ -70,29 +54,13 @@
 					    <div class="form-group col-md-12">
 				            <label for="inputPassword1" class="control-label">Departure Date</label>
 				            <div class="">
-				                <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
-				                	<span class="input-group-btn">
-				                        <button class="btn default" type="button">
-				                            <i class="fa fa-calendar"></i>
-				                        </button>
-				                    </span>
-				                    <input type="text" class="form-control" readonly name="start_date" value="{{ $start_date }}">
-				                </div>
+				                <input type="text" value="{{ $start_date }}" class="form-control" name="total_passenger" readonly="">
 				            </div>
 				        </div>
 
 				        <div class="form-group col-md-12">
 				            <label for="inputPassword1" class="control-label">Return Date</label>
-				            <div class="">
-				                <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
-				                	<span class="input-group-btn">
-				                        <button class="btn default" type="button">
-				                            <i class="fa fa-calendar"></i>
-				                        </button>
-				                    </span>
-				                    <input type="text" class="form-control" readonly name="end_date" value="{{ $end_date }}">
-				                </div>
-				            </div>
+				            <input type="text" value="{{ $end_date }}" class="form-control" name="total_passenger" readonly="">
 				        </div>
 
 				        <div class="col-md-12">

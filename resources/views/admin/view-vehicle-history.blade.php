@@ -21,7 +21,7 @@
 
 @section('content')
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-10 col-md-offset-1 well">
 		<!-- BEGIN BORDERED TABLE PORTLET-->
 	    <div class="portlet box blue-dark">
 	        <div class="portlet-title">

@@ -1,73 +1,59 @@
+
 @extends('layouts.master')
-
 @section('head')
-
 @stop
-
-@section('title')
-Manage Admin
-@stop
-
-@section('breadcrumb')
-<li>
-	<i class="fa fa-home"></i>
-	<a href="">Home</a>
-	<i class="fa fa-angle-right"></i>
-</li>
-<li>
-	<a href="#">Manage Admin</a>
-</li>
-@stop
-
 @section('content')
-
 <header class="masthead">
 	<div class="overlay">
 		<div class="container">
-			<h1 class="display-1 text-white">Manage User</h1>
+			<h1 style="color: #ffffff; font-size: 60px;">Manage User</h1>
 			<h2 class="display-4 text-white"></h2>
 		</div>
 	</div>
 </header>
-
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="/homepage">Home</a></li>
+  <li class="breadcrumb-item">Login</li>
+  <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+  <li class="breadcrumb-item">Manage User</li>
+</ol>
 <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
-	<div class="col-md-12">
+	<div class="col-md-12 well">
 		<a href="" class="btn btn-sm green-jungle pull-right" id="createButton" data-toggle="modal" data-target="#createModal">Create New User</a>
-	</div>
-	<table class="table">
-		<thead class="thead-inverse">
-			<tr>
-				<th></th>
-				<th> # </th>
-				<th> Name </th>
-				<th> Email </th>
-				<th> Staff / Matrik No. </th>
-				<th> Phone </th>
-				<th> Role </th>
-				<th> Faculty </th>
-			</tr>
-		</thead>
-		<tbody id="tbody">
-			<?php $count = 1; ?>
-			@foreach($users as $user)
-			<?php $currentPageTotalNumber = ($users->currentPage() - 1) * 5; ?>
-			<tr>
-				<td> <input class="single-checkbox" type="checkbox" name="users_id[]" form="form_update_status" value="{{ $user->id }}"> </td>
-				<td>{{$count + $currentPageTotalNumber}}</td>
-				<td> {{ $user->name }}</td>
-				<td> {{ $user->email }}</td>
-				<td> {{ $user->matrik }}</td>
-				<td> {{ $user->phone }}</td>
-				<td> 
-					@if($user->roles_id == 1)
-					Admin
-					@else
-					User
-					@endif
-				</td>
-				<td> {{ $user->faculty }}</td>
-				<td> <a href="" class="btn blue btn-sm editBtn" data-toggle="modal" data-target="#editModal" data-user_id="{{ $user->id }}" data-username="{{ $user->name }}" data-user_email="{{ $user->email }}" data-roles_id="{{ $user->roles_id }}" data-faculty="{{ $user->faculty }}" data-phone="{{ $user->phone }}" data-matrik="{{ $user->matrik }}">Edit</a>
+		<table class="table">
+			<thead class="thead-inverse">
+				<tr>
+					<th></th>
+					<th> # </th>
+					<th> Name </th>
+					<th> Email </th>
+					<th> Staff / Matrik No. </th>
+					<th> Phone </th>
+					<th> Role </th>
+					<th> Faculty </th>
 				</tr>
+			</thead>
+			<tbody id="tbody">
+				<?php $count = 1; ?>
+				@foreach($users as $user)
+				<?php $currentPageTotalNumber = ($users->currentPage() - 1) * 5; ?>
+				<tr>
+					<td> <input class="single-checkbox" type="checkbox" name="users_id[]" form="form_update_status" value="{{ $user->id }}"> </td>
+					<td>{{$count + $currentPageTotalNumber}}</td>
+					<td> {{ $user->name }}</td>
+					<td> {{ $user->email }}</td>
+					<td> {{ $user->matrik }}</td>
+					<td> {{ $user->phone }}</td>
+					<td>
+						@if($user->roles_id == 1)
+						Admin
+						@else
+						User
+						@endif
+					</td>
+					<td> {{ $user->faculty }}</td>
+					<td> <a href="" class="btn blue btn-sm editBtn" data-toggle="modal" data-target="#editModal" data-user_id="{{ $user->id }}" data-username="{{ $user->name }}" data-user_email="{{ $user->email }}" data-roles_id="{{ $user->roles_id }}" data-faculty="{{ $user->faculty }}" data-phone="{{ $user->phone }}" data-matrik="{{ $user->matrik }}">Edit</a>
+				</td>
 				<?php $count++ ?>
 				@endforeach
 			</tbody>
@@ -85,14 +71,11 @@ Manage Admin
 			</div>
 		</div>
 	</div>
-	
 	<!-- END BORDERED TABLE PORTLET-->
 </div>
-
 <!-- Modal -->
 <div id="editModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
@@ -126,21 +109,18 @@ Manage Admin
 							<input type="password" name="password_confirmation" class="form-control input-line">
 						</div>
 					</div>
-
 					<div class="form-group col-md-12">
 						<label for="inputPassword1" class="col-md-4 control-label">Staff/matrik number</label>
 						<div class="col-md-8">
 							<input type="text" name="matrik" class="form-control input-line" id="m_matrik">
 						</div>
 					</div>
-
 					<div class="form-group col-md-12">
 						<label for="inputPassword1" class="col-md-4 control-label">Phone</label>
 						<div class="col-md-8">
 							<input type="text" name="phone" class="form-control input-line" id="m_phone">
 						</div>
 					</div>
-
 					<div class="form-group col-md-12">
 						<label for="inputPassword1" class="col-md-4 control-label">Roles</label>
 						<div class="col-md-8">
@@ -166,7 +146,6 @@ Manage Admin
 						</div>
 					</div>
 					<input type="hidden" name="id" id="m_user_id">
-
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -175,15 +154,12 @@ Manage Admin
 				{!! Form::close() !!}
 			</div>
 		</div>
-
 	</div>
 </div>
 <!-- End Modal -->
-
 <!-- Modal -->
 <div id="createModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
@@ -208,7 +184,6 @@ Manage Admin
 					<div class="form-group col-md-12">
 						<label for="inputPassword1" class="col-md-4 control-label">Password</label>
 						<div class="col-md-8">
-
 							<input type="password" name="password" class="form-control input-line" id="password">
 						</div>
 					</div>
@@ -224,14 +199,12 @@ Manage Admin
 							<input type="text" name="matrik" class="form-control input-line" id="">
 						</div>
 					</div>
-
 					<div class="form-group col-md-12">
 						<label for="inputPassword1" class="col-md-4 control-label">Phone</label>
 						<div class="col-md-8">
 							<input type="text" name="phone" class="form-control input-line" id="">
 						</div>
 					</div>
-
 					<div class="form-group col-md-12">
 						<label for="inputPassword1" class="col-md-4 control-label">Roles</label>
 						<div class="col-md-8">
@@ -264,15 +237,11 @@ Manage Admin
 				{!! Form::close() !!}
 			</div>
 		</div>
-
 	</div>
 </div>
 <!-- End modal -->
-
 @stop
-
 @section('script')
-
 <script>
 	$(document).ready(function(){
 		$('#checkall-checkbox').click(function(){
@@ -285,19 +254,15 @@ Manage Admin
 				$("input.single-checkbox").prop('checked', false);
 			}
 		});
-
 		$('.editBtn').click(function(){
-
 			var roles_id = $(this).data('roles_id');
 			var faculty = $(this).data('faculty');
-
 			if(roles_id == 1){
 				role = 'Admin';
 			}
 			else{
 				role = 'User';
 			}
-
 			$("#m_user_id").val($(this).data('user_id'));
 			$("#m_username").val($(this).data('username'));
 			$("#m_email").val($(this).data('user_email'));
@@ -306,42 +271,33 @@ Manage Admin
 			$("#m_faculty").val(faculty);
 			$("#m_roles_id").val(roles_id);
 		});
-
-       //If selected role is admin, then disabled select faculty
-
-       $("#faculty_select").attr("disabled", true);
-
-       $("#roles_select").change(function(){
-       	if($("#roles_select").val() == '1'){
-       		$("#faculty_select").attr("disabled", true);
-       	}
-       	else{
-       		$("#faculty_select").attr("disabled", false);
-       	}
-       });
-
-   });
+//If selected role is admin, then disabled select faculty
+$("#faculty_select").attr("disabled", true);
+$("#roles_select").change(function(){
+	if($("#roles_select").val() == '1'){
+		$("#faculty_select").attr("disabled", true);
+	}
+	else{
+		$("#faculty_select").attr("disabled", false);
+	}
+});
+});
 </script>
-
 @if(Session::has('create_message'))
 <script>
 	alertify.success("{{Session::get('create_message')}}");
 </script>
 @endif
-
 @if(Session::has('delete_message'))
 <script>
 	alertify.warning("{{Session::get('delete_message')}}");
 </script>
 @endif
-
 @if(Session::has('update_message'))
 <script>
 	alertify.success("{{Session::get('update_message')}}");
 </script>
 @endif
-
 @include('errors.validation-errors')
 @include('errors.validation-errors-script')
-
 @stop

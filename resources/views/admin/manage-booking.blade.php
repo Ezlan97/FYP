@@ -4,24 +4,23 @@
 
 @stop
 
-@section('title')
-    Booking Management
-@stop
-
-@section('breadcrumb')
-    <li>
-        <i class="fa fa-home"></i>
-        <a href="">Home</a>
-        <i class="fa fa-angle-right"></i>
-    </li>
-    <li>
-        <a href="#">Booking Management</a>
-    </li>
-@stop
-
 @section('content')
-<div class="row">
-	<div class="col-md-12">
+<header class="masthead">
+	<div class="overlay">
+		<div class="container">
+			<h1 style="color: #ffffff; font-size: 60px;">Manage Booking</h1>
+			<h2 class="display-4 text-white"></h2>
+		</div>
+	</div>
+</header>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="/homepage">Home</a></li>
+  <li class="breadcrumb-item">Login</li>
+  <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+  <li class="breadcrumb-item">Manage Booking</li>
+</ol>
+<div class="row" style="padding-top: 60px; padding-bottom: 60px;">
+	<div class="col-md-10 col-md-offset-1 well">
 		<!-- BEGIN BORDERED TABLE PORTLET-->
 	    <div class="portlet box blue-dark">
 	        <div class="portlet-title">
