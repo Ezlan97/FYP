@@ -11,9 +11,9 @@
 	</div>
 </header>
 <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/homepage">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{ url('login') }}">Login</a></li>
-    <li class="breadcrumb-item active">Dashboard</li>
+	<li class="breadcrumb-item"><a href="/homepage">Home</a></li>
+	<li class="breadcrumb-item"><a href="{{ url('login') }}">Login</a></li>
+	<li class="breadcrumb-item active">Dashboard</li>
 </ol>
 <div class="container" style="padding-top: 80px; padding-bottom: 80px;">
 	<div class="col-md-10 col-md-offset-1 well">
@@ -42,13 +42,11 @@
 						<thead>
 							<tr class="uppercase">
 								<th> # </th>
-								<th> Car Model </th>
 								<th> Destination </th>
 								<th> Purpose </th>
 								<th> Departure Date </th>
 								<th> Return Date </th>
 								<th> Booking Date </th>
-								<th> File </th>
 								<th> Status </th>
 								<th> Remarks </th>
 							</tr>
@@ -60,17 +58,11 @@
 							<?php $currentPageTotalNumber = ($histories->currentPage() - 1) * 5; ?>
 							<tr>
 								<td><b>{{$count + $currentPageTotalNumber}}</b></td>
-								<td> {{ $history->model }}</td>
 								<td> {{ $history->destination }}</td>
 								<td> {{ $history->purpose }}</td>
 								<td> {{ $history->start_date }}</td>
 								<td> {{ $history->end_date }}</td>
 								<td> {{ $history->created_at }}</td>
-								<td>
-									<a class="btn btn-transparent grey-mint btn-sm active" href="{{ $directory.$history->filepath }}" download>
-										Download
-									</a>
-								</td>
 								<td>
 									<span
 										class="label min-width-100px
@@ -107,10 +99,10 @@
 			</div>
 		</div>
 		<!-- END BORDERED TABLE PORTLET-->
+			<div class="col-md-7 text-center">
+		<a href="" class="btn btn-sm green-jungle pull-right" id="createButton" data-toggle="modal" data-target="#createModal"><button class="btn btn-lg btn-success">Book Now</button></a>
 	</div>
-				<div class="col-md-12 text-center">
-	<a href="" class="btn btn-sm green-jungle pull-right" id="createButton" data-toggle="modal" data-target="#createModal"><button class="btn btn-sm btn-success pull-right">Book Now</button></a>
-</div>
+	</div>
 </div>
 <!-- Modal -->
 <div id="createModal" class="modal fade" role="dialog">

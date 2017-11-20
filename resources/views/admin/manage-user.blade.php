@@ -19,7 +19,6 @@
 </ol>
 <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
 	<div class="col-md-12 well">
-		<a href="" class="btn btn-sm green-jungle pull-right" id="createButton" data-toggle="modal" data-target="#createModal">Create New User</a>
 		<table class="table">
 			<thead class="thead-inverse">
 				<tr>
@@ -52,7 +51,7 @@
 						@endif
 					</td>
 					<td> {{ $user->faculty }}</td>
-					<td> <a href="" class="btn blue btn-sm editBtn" data-toggle="modal" data-target="#editModal" data-user_id="{{ $user->id }}" data-username="{{ $user->name }}" data-user_email="{{ $user->email }}" data-roles_id="{{ $user->roles_id }}" data-faculty="{{ $user->faculty }}" data-phone="{{ $user->phone }}" data-matrik="{{ $user->matrik }}">Edit</a>
+					<td> <a href="" class="btn blue btn-sm editBtn" data-toggle="modal" data-target="#editModal" data-user_id="{{ $user->id }}" data-username="{{ $user->name }}" data-user_email="{{ $user->email }}" data-roles_id="{{ $user->roles_id }}" data-faculty="{{ $user->faculty }}" data-phone="{{ $user->phone }}" data-matrik="{{ $user->matrik }}"><button class="btn btn-primary">Edit</button></a>
 				</td>
 				<?php $count++ ?>
 				@endforeach
@@ -72,6 +71,9 @@
 		</div>
 	</div>
 	<!-- END BORDERED TABLE PORTLET-->
+	<div class="col-md-7 text-center">
+	<a href="" class="btn btn-lg" id="createButton" data-toggle="modal" data-target="#createModal"><button class="btn btn-lg btn-success">Create New User</button></a>
+	</div>
 </div>
 <!-- Modal -->
 <div id="editModal" class="modal fade" role="dialog">

@@ -30,8 +30,8 @@
                             <input class="form-control " type="text" placeholder="Fullname" name="name" value="{{ old('name') }}" required/>
                         </div>
                         <div class="form-group">
-                            <label class="control-label visible-ie8 visible-ie9">Staff/Matrics No.</label>
-                            <input class="form-control " type="text" autocomplete="off" placeholder="Staff/Matrics No." name="matrik" value="{{ old('matrik') }}" required/>
+                            <label class="control-label visible-ie8 visible-ie9">Email</label>
+                            <input class="form-control " type="text" autocomplete="off" placeholder="E-mail Address" name="email" value="{{ old('email') }}" required/>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Position</label>
@@ -63,8 +63,8 @@
                             Fill up login information
                         </p>
                         <div class="form-group">
-                            <label class="control-label visible-ie8 visible-ie9">Email</label>
-                            <input class="form-control " type="text" autocomplete="off" placeholder="E-mail Address" name="email" value="{{ old('email') }}" required/>
+                            <label class="control-label visible-ie8 visible-ie9">Staff/Matrics No.</label>
+                            <input class="form-control " type="text" autocomplete="off" placeholder="Staff/Matrics No." name="matrik" value="{{ old('matrik') }}" required/>
                         </div>
                         <div class="form-group">
                             <label class="control-label visible-ie8 visible-ie9">Password</label>
