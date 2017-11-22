@@ -36,7 +36,7 @@
 		<link rel="stylesheet" href="{{ asset('assets/bttn.surge/bttn.min.css') }}">
 		<link href="{{ asset('css/one-page-wonder.css') }}" rel="stylesheet">
 		{!! Html::style('vendor/seguce92/fullcalendar/fullcalendar.min.css') !!}
-        {!! Html::style('vendor/seguce92/bootstrap-datetimepicker/css/bootstrap-material-datetimepicker.css') !!}
+		{!! Html::style('vendor/seguce92/bootstrap-datetimepicker/css/bootstrap-material-datetimepicker.css') !!}
 		
 		<!-- Custom CSS -->
 		<style>
@@ -118,6 +118,7 @@
 	<script src="/../assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
 	<script src="/../assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
 	<script src="/../assets/admin/pages/scripts/components-pickers.js"></script>
+	<script src="{{asset('assets/scripts/printPage.js') }}"></script>
 	<!-- END PAGE LEVEL SCRIPTS -->
 	<!-- Clock -->
 	<script type="text/javascript">
@@ -154,84 +155,78 @@
 	ComponentsPickers.init();
 	});
 	</script>
+	<script>
+	$(document).ready(function() {
+	$(".btnPrint").printPage();
+	});
+	</script>
 	@yield('script')
 	<!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->
- {!! Html::script('vendor/seguce92/jquery.min.js') !!}
-    {!! Html::script('vendor/seguce92/bootstrap/js/bootstrap.min.js') !!}
-    {!! Html::script('vendor/seguce92/fullcalendar/lib/moment.min.js') !!}
-    {!! Html::script('vendor/seguce92/fullcalendar/fullcalendar.min.js') !!}
-    {!! Html::script('vendor/seguce92/bootstrap-datetimepicker/js/bootstrap-material-datetimepicker.js') !!}
-    {!! Html::script('vendor/seguce92/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') !!}
-         <script>
-        var BASEURL = "{{ url('/') }}";
-        $(document).ready(function() {
-
-    		$('#calendar').fullCalendar({
-    			header: {
-    				left: 'prev,next today',
-    				center: 'title',
-    				right: 'month,basicWeek,basicDay'
-    			},
-    			navLinks: true, // can click day/week names to navigate views
-    			editable: true,
-                selectable: true,
-                selectHelper: true,
-
-                select: function(start){
-                    start = moment(start.format());
-                    $('#responsive-modal').modal('show');
-                },
-
-    			events: BASEURL + '/events',
-
-                eventClick: function(event, jsEvent, view){
-                    var date_start = $.fullCalendar.moment(event.start).format('YYYY-MM-DD hh:mm:ss');
-                    var date_end = $.fullCalendar.moment(event.end).format('YYYY-MM-DD hh:mm:ss');
-                    $('#modal-event #delete').attr('data-id', event.id);
-                    $('#modal-event #_title').val(event.title);
-                    $('#modal-event #_date_start').val(date_start);
-                    $('#modal-event #_time_start').val(time_start);
-                    $('#modal-event #_date_end').val(date_end);
-                    $('#modal-event #_color').val(event.color);
-                    $('#modal-event').modal('show');
-                }
-    		});
-
-    	});
-
-        $('.colorpicker').colorpicker();
-
-        $('#date_start').bootstrapMaterialDatePicker({
-            date: true,
-            shortTime: false,
-            format: 'YYYY-MM-DD HH:mm:ss'
-        });
-
-        $('#date_end').bootstrapMaterialDatePicker({
-            date: true,
-            shortTime: false,
-            format: 'YYYY-MM-DD HH:mm:ss'
-        });
-
-        $('#delete').on('click', function(){
-            var x = $(this);
-            var delete_url = x.attr('data-href')+'/'+x.attr('data-id');
-
-            $.ajax({
-                url: delete_url,
-                type: 'PATCH',
-                success: function(result){
-                    $('#modal-event').modal('hide');
-                    alert(result.message);
-                },
-                error: function(result){
-                    $('#modal-event').modal('hide');
-                    alert(result.message);
-                }
-            });
-        });
-
-    </script>
+{!! Html::script('vendor/seguce92/jquery.min.js') !!}
+{!! Html::script('vendor/seguce92/bootstrap/js/bootstrap.min.js') !!}
+{!! Html::script('vendor/seguce92/fullcalendar/lib/moment.min.js') !!}
+{!! Html::script('vendor/seguce92/fullcalendar/fullcalendar.min.js') !!}
+{!! Html::script('vendor/seguce92/bootstrap-datetimepicker/js/bootstrap-material-datetimepicker.js') !!}
+{!! Html::script('vendor/seguce92/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') !!}
+<script>
+var BASEURL = "{{ url('/') }}";
+$(document).ready(function() {
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,basicWeek,basicDay'
+			},
+			navLinks: true, // can click day/week names to navigate views
+			editable: true,
+selectable: true,
+selectHelper: true,
+select: function(start){
+start = moment(start.format());
+$('#responsive-modal').modal('show');
+},
+			events: BASEURL + '/events',
+eventClick: function(event, jsEvent, view){
+var date_start = $.fullCalendar.moment(event.start).format('YYYY-MM-DD hh:mm:ss');
+var date_end = $.fullCalendar.moment(event.end).format('YYYY-MM-DD hh:mm:ss');
+$('#modal-event #delete').attr('data-id', event.id);
+$('#modal-event #_title').val(event.title);
+$('#modal-event #_date_start').val(date_start);
+$('#modal-event #_time_start').val(time_start);
+$('#modal-event #_date_end').val(date_end);
+$('#modal-event #_color').val(event.color);
+$('#modal-event').modal('show');
+}
+		});
+	});
+$('.colorpicker').colorpicker();
+$('#date_start').bootstrapMaterialDatePicker({
+date: true,
+shortTime: false,
+format: 'YYYY-MM-DD HH:mm:ss'
+});
+$('#date_end').bootstrapMaterialDatePicker({
+date: true,
+shortTime: false,
+format: 'YYYY-MM-DD HH:mm:ss'
+});
+$('#delete').on('click', function(){
+var x = $(this);
+var delete_url = x.attr('data-href')+'/'+x.attr('data-id');
+$.ajax({
+url: delete_url,
+type: 'PATCH',
+success: function(result){
+$('#modal-event').modal('hide');
+alert(result.message);
+},
+error: function(result){
+$('#modal-event').modal('hide');
+alert(result.message);
+}
+});
+});
+</script>
 </html>

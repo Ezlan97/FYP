@@ -56,6 +56,7 @@
 	                            <th> Return Date </th>
 	                            <th> Booking Date </th>
 	                            <th> File </th>
+	                            <th> Print </th>
 	                            <th></th>
 	                            <th> Status </th>
 	                            <th> Remarks </th>
@@ -98,8 +99,13 @@
 	                            <td> {{ $history->end_date }}</td>
 	                            <td> {{ $history->created_at }}</td>
 	                            <td>
-		                            <a class="btn btn-transparent grey-mint btn-sm active" href="{{ $directory.$history->filepath }}" download>
+		                            <a class="btn btn-success" href="{{ $directory.$history->filepath }}" download>
 		                            	Download
+		                            </a>
+	                            </td>
+	                            <td>
+		                            <a class="btn btn-primary btnPrint" href="{{ $directory.$history->filepath }}">
+		                            	Print
 		                            </a>
 	                            </td>
 	                            <td>
