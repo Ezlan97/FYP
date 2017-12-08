@@ -57,7 +57,7 @@
 	                            <th> Booking Date </th>
 	                            <th> File </th>
 	                            <th> Print </th>
-	                            <th></th>
+	                            <th>Action</th>
 	                            <th> Status </th>
 	                            <th> Remarks </th>
 	                        </tr>
@@ -109,7 +109,7 @@
 		                            </a>
 	                            </td>
 	                            <td>
-	                            	<a href="{{ route('admin.approve-reject-confirmation', $history->history_id ) }}" class="btn blue btn-sm editBtn">Approve | Reject</a>
+	                            	<a href="{{ route('admin.approve-reject-confirmation', $history->history_id ) }}" class="btn btn-sm btn-warning">Approve | Reject</a>
 	                            </td>
 	                            <td>
 	                                <span 

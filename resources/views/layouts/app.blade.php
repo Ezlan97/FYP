@@ -42,11 +42,43 @@
         </nav>
         @yield('content')
         <!-- Footer -->
-        <footer class="py-5 bg-dark">
+        <footer class="bg-dark text-white" style="padding-top: 30px;">
             <div class="container">
-                <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <h5>Location</h5>
+                        <p>Kolej Universiti Islam Antarabangsa Selangor
+                            <br> Bandar Seri Putra,
+                            <br> 43600 Bangi,
+                        <br> Selangor Darul Ehsan.</p>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <h5>Contact Us</h5>
+                        <p>Phone : 603-8925 4251
+                            <br> Fax : 603-8926 8462
+                            <br> Facebook   : (KUIS) Kolej Universiti Islam Antarabangsa Selangor
+                            <br> Email : info@kuis.edu.my
+                            <br>
+                        </div>
+                        <div class="col-lg-4 col-sm-6 mb-4">
+                            <h5>About Us</h5>
+                            <p>KUIS is committed to ensuring that every program offered is competitive, competitive and qualified and meets Malaysian Qualifications Agency (MQA) certification. http://www.mqa.gov.my/.</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="copyrights">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p>&copy; 2017 Kuis Transportation Booking System. All rights reserved.</p>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <p>Created with
+                                <3 by Shuhadah!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- /.container -->
         </footer>
         <!-- Bootstrap core JavaScript -->
         <script src="vendor/jquery/jquery.min.js"></script>

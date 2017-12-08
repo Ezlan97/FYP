@@ -13,7 +13,7 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/homepage">Home</a></li>
     <li class="breadcrumb-item"><a href="{{ url('login') }}">Login</a></li>
-    <li class="breadcrumb-item active">Dashboard</li>
+    <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
     <li class="breadcrumb-item active">Book</a></li>
 </ol>
 <div class="container-fluid" style="padding-top: 35px; padding-bottom: 35px;">

@@ -6,14 +6,14 @@
 	<div class="overlay">
 		<div class="container">
 			<h1 style="color: #ffffff; font-size: 60px;">Welcome {{ Auth::user()->name }}</h1>
-			<h2 class="display-4 text-white"></h2>
+			<h2 class="display-4 text-white" style="color: #ffffff;">Start Booking Now</h2>
 		</div>
 	</div>
 </header>
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="/homepage">Home</a></li>
 	<li class="breadcrumb-item"><a href="{{ url('login') }}">Login</a></li>
-	<li class="breadcrumb-item active">Dashboard</li>
+	<li class="breadcrumb-item active">Booking</li>
 </ol>
 <div class="container" style="padding-top: 80px; padding-bottom: 80px;">
 	<div class="col-md-10 col-md-offset-1 well">
@@ -65,44 +65,44 @@
 								<td> {{ $history->created_at }}</td>
 								<td>
 									<span
-										class="label min-width-100px
-										@if( $history->approval == 2) {{ 'label-danger' }}
-										@elseif ($history->approval == 0){{ 'label-default' }}
-										@elseif ($history->approval == 1){{ 'label-success' }}
-										@else {{ 'label-danger' }}
-										@endif">
-										@if( $history->approval == 2) {{ 'Rejected' }}
-										@elseif ($history->approval == 0){{ 'Pending' }}
-										@elseif ($history->approval == 1){{ 'Approved' }}
-										@else {{ 'Rejected' }}
-										@endif
-									</span>
-								</td>
-								<td>
-									<a href="" class="showRemarks" data-toggle="modal" data-target="#remarksModal" data-remarks="{{ $history->remarks }}">
-										<i class="fa fa-list"></i>
-										View Remarks
-									</a>
-								</td>
-							</tr>
-							<?php $count++ ?>
-							@endforeach
-							@endif
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div class="col-md-12">
-				<div class="pull-right">
-					{{$histories->render()}}
-				</div>
+									class="label min-width-100px
+									@if( $history->approval == 2) {{ 'label-danger' }}
+									@elseif ($history->approval == 0){{ 'label-default' }}
+									@elseif ($history->approval == 1){{ 'label-success' }}
+									@else {{ 'label-danger' }}
+									@endif">
+									@if( $history->approval == 2) {{ 'Rejected' }}
+									@elseif ($history->approval == 0){{ 'Pending' }}
+									@elseif ($history->approval == 1){{ 'Approved' }}
+									@else {{ 'Rejected' }}
+									@endif
+								</span>
+							</td>
+							<td>
+								<a href="" class="showRemarks" data-toggle="modal" data-target="#remarksModal" data-remarks="{{ $history->remarks }}">
+									<i class="fa fa-list"></i>
+									View Remarks
+								</a>
+							</td>
+						</tr>
+						<?php $count++ ?>
+						@endforeach
+						@endif
+					</tbody>
+				</table>
 			</div>
 		</div>
-		<!-- END BORDERED TABLE PORTLET-->
-			<div class="col-md-7 text-center">
+		<div class="col-md-12">
+			<div class="pull-right">
+				{{$histories->render()}}
+			</div>
+		</div>
+	</div>
+	<!-- END BORDERED TABLE PORTLET-->
+	<div class="col-md-7 text-center">
 		<a href="" class="btn btn-sm green-jungle pull-right" id="createButton" data-toggle="modal" data-target="#createModal"><button class="btn btn-lg btn-success">Book Now</button></a>
 	</div>
-	</div>
+</div>
 </div>
 <!-- Modal -->
 <div id="createModal" class="modal fade" role="dialog">
@@ -116,7 +116,6 @@
 			<div class="modal-body">
 				<div class="table-scrollable table-scrollable-borderless">
 					{!! Form::open(['method'=>'POST', 'action'=>'UserController@showAvailableBooking', 'files'=>true]) !!}
-					
 					<div class="form-group col-md-12">
 						<label for="inputPassword1" class="col-md-4 control-label">Departure date</label>
 						<div class="col-md-8">
@@ -178,26 +177,26 @@
 		}
 	}
 	$(document).ready(function(){
-$('.showRemarks').click(function(){
+		$('.showRemarks').click(function(){
 			$("textarea#m_remarks").val($(this).data('remarks'));
-});
-	$(".submitDate").click(function(event){
-		var isValid = true;
-		if($('#e_date').val() == '' || $('#s_date').val() == '')
-				{
-			$('#createModal').modal('toggle');
-			swal(
-			'',
-			"Please select date!",
-			'error'
-			)
-			isValid = false;
-			}
-		if (!isValid) {
-		event.preventDefault();
-		}
 		});
-});
+		$(".submitDate").click(function(event){
+			var isValid = true;
+			if($('#e_date').val() == '' || $('#s_date').val() == '')
+			{
+				$('#createModal').modal('toggle');
+				swal(
+					'',
+					"Please select date!",
+					'error'
+					)
+				isValid = false;
+			}
+			if (!isValid) {
+				event.preventDefault();
+			}
+		});
+	});
 </script>
 @if(Session::has('message'))
 <script>
@@ -206,7 +205,7 @@ $('.showRemarks').click(function(){
 		"{{Session::get('message')}}",
 		'success'
 		)
-</script>
-@endif
-@include('errors.validation-errors')
-@stop
+	</script>
+	@endif
+	@include('errors.validation-errors')
+	@stop

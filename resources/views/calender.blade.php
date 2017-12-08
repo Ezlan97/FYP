@@ -1,5 +1,17 @@
 @extends('layouts.calender')
 @section('content')
+@if(Auth::guest())
+
+<header class="masthead">
+    <div class="overlay">
+        <div class="container">
+            <h1 class="display-1 text-white">Please Login or Register</h1>
+            <h2 class="display-4 text-white">To Check Before Book</h2>
+        </div>
+    </div>
+</header>
+
+@else
 <header class="masthead">
     <div class="overlay">
         <div class="container">
@@ -12,6 +24,26 @@
     <li class="breadcrumb-item"><a href="/homepage">Home</a></li>
     <li class="breadcrumb-item active">Check Availability</li>
 </ol>
+<div class="container">
+  <h1 class="my-4 text-center">Vehicle Color</h1>
+  <div class="row">
+    <div class="col-lg-4 mb-4">
+      <div class="alert alert-primary" role="alert">
+        <h4 class="alert-heading text-center">Car</h4>
+      </div>
+    </div>
+    <div class="col-lg-4 mb-4">
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading text-center">Bus</h4>
+      </div>
+    </div>
+    <div class="col-lg-4 mb-4">
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading text-center">Van</h4>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
     <div id='calendar'></div>
     <div id="modal-event" class="modal fade" tabindex="-1" data-backdrop="static">
@@ -54,4 +86,5 @@
         </div>
     </div>
 </div>
+@endif
 @endsection

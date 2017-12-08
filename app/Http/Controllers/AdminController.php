@@ -115,7 +115,6 @@ class AdminController extends Controller
 
     public function createVehicle(Request $request, Vehicle $input){
         //Get all send request and store into variable
-
         $input = Vehicle::create($request->all());
 
         //Create vehicle based on input 

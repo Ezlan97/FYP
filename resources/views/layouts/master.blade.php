@@ -71,12 +71,12 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="collapse navbar-collapse" id="navbarResponsive">
-					@if (Auth::guest())
+					@if(Auth::user()->roles_id>1)
 					<ul class="navbar-nav nav">
 						<li class="nav-item px-lg-4"><a class="nav-link" href="/homepage">Home</a></li>
 						<li class="nav-item px-lg-4"><a class="nav-link" href="calender">Check Booking Availability</a></li>
-						<li class="nav-item px-lg-4"><a class="nav-link" href="{{ url('login') }}">Login</a></li>
-						<li class="nav-item px-lg-4"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+						<li class="nav-item px-lg-4"><a class="nav-link" href="/admin">Booking</a></li>
+						<li class="nav-item px-lg-4"><a class="nav-link" href="{{ url('/logout') }}">Log Out</a></li>
 					</ul>
 					@else
 					<ul class="navbar-nav nav">
@@ -93,10 +93,43 @@
 	</div>
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
-	<footer class="text-center">
-		<a class="up-arrow">
-		</a><br><br>
-		<p>Bootstrap Theme Made By <a href="https://www.w3schools.com" data-toggle="tooltip" title="Visit w3schools">www.w3schools.com</a></p>
+	<footer class="bg-dark text-white" style="padding-top: 30px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-sm-6 mb-4">
+					<h5>Location</h5>
+					<p>Kolej Universiti Islam Antarabangsa Selangor
+						<br> Bandar Seri Putra,
+						<br> 43600 Bangi,
+					<br> Selangor Darul Ehsan.</p>
+				</div>
+				<div class="col-lg-4 col-sm-6 mb-4">
+					<h5>Contact Us</h5>
+					<p>Phone : 603-8925 4251
+						<br> Fax : 603-8926 8462
+						<br> Facebook   : (KUIS) Kolej Universiti Islam Antarabangsa Selangor
+						<br> Email : info@kuis.edu.my
+						<br>
+					</div>
+					<div class="col-lg-4 col-sm-6 mb-4">
+						<h5>About Us</h5>
+						<p>KUIS is committed to ensuring that every program offered is competitive, competitive and qualified and meets Malaysian Qualifications Agency (MQA) certification. http://www.mqa.gov.my/.</p>
+					</div>
+				</div>
+				<hr>
+				<div class="copyrights">
+					<div class="row">
+						<div class="col-sm-6">
+							<p>&copy; 2017 Kuis Transportation Booking System. All rights reserved.</p>
+						</div>
+						<div class="col-sm-6 text-right">
+							<p>Created with
+							<3 by Shuhadah!</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</footer>
 	<!-- END FOOTER -->
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
