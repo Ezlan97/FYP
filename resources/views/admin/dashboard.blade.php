@@ -47,22 +47,11 @@
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container" style="padding-bottom: 40px;">
   <h1 class="my-4 text-center">Manage</h1>
   <!-- Marketing Icons Section -->
   <div class="row text-center">
-    <div class="col-lg-4 mb-4">
-      <div class="card h-100">
-        <h4 class="card-header">User Management</h4>
-        <div class="card-body">
-          <p class="card-text">Create,update,delete and check user booking history.</p>
-        </div>
-        <div class="card-footer">
-          <a href="{{ route('admin.manage-user') }}" class="btn btn-primary">Manage</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 mb-4">
+    <div class="col-lg-6 mb-6">
       <div class="card h-100">
         <h4 class="card-header">Booking Management</h4>
         <div class="card-body">
@@ -73,7 +62,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-4 mb-4">
+    <div class="col-lg-6 mb-6">
       <div class="card h-100">
         <h4 class="card-header">Vehicle Management</h4>
         <div class="card-body">

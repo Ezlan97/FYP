@@ -15,6 +15,7 @@ class CreateBookingHistoriesTable extends Migration
         Schema::create('booking_histories', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
+            $table->string('position');
             $table->integer('car_id')->nullable();
             $table->integer('attachment_id');
             $table->datetime('start_date');

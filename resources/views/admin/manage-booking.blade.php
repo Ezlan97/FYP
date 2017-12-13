@@ -48,6 +48,7 @@
 	                        <tr class="uppercase">
 	                            <th> # </th>
 	                            <th> User Name </th>
+	                            <th> Position </th>
 	                            <th> Car Model </th>
 	                            <th> Destination </th>
 	                            <th> Purpose </th>
@@ -81,16 +82,14 @@
 	                        <tr>
 	                        	<td><b>{{$count + $currentPageTotalNumber}}</b></td>
 	                        	<td>
-	                        		<a href="" class="showUser" data-toggle="modal" data-target="#userModal" data-username="{{ $history->name }}" data-user_email="{{ $history->email }}" data-faculty="{{ $history->faculty }}" data-phone="{{ $history->phone }}" data-matrik="{{ $history->matrik }}"> 
-	                        		<i class="fa fa-list"></i>
 	                        		{{ $history->name }}
 	                        		</a>
 	                        	</td>
+	                        	<td> {{ $history->position }}</td>
 	                            <td>
-	                            	<a href="" class="showVehicle" data-toggle="modal" data-target="#vehicleModal" data-vehicle_model="{{ $history->model }}" data-vehicle_type="{{ $history->type }}" data-vehicle_plate="{{ $history->plate }}"> 
-	                            	<i class="fa fa-list"></i>
+
 	                            	{{ $history->model }}
-	                            	</a>
+	                            
 	                            </td>
 	                            <td> {{ $history->destination }}</td>
 	                            <td> {{ $history->purpose }}</td>
@@ -129,10 +128,7 @@
 	                                </span>
 	                            </td>
 	                            <td>
-	                            	<a href="" class="showRemarks" data-toggle="modal" data-target="#remarksModal" data-remarks="{{ $history->remarks }}"> 
-	                            	<i class="fa fa-list"></i>
-	                            	View Remarks
-	                            	</a>
+	                            	{{ $history->remarks }}
 	                            </td>
 	                        </tr>
 	                        <?php $count++ ?>
