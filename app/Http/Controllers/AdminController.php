@@ -201,7 +201,7 @@ class AdminController extends Controller
         $directory = '/attachment/';
 
         //Get all booking histories info
-        $histories = booking_history::select('users.name', 'users.email', 'users.matrik', 'users.phone', 'users.faculty', 'booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date','booking_histories.remarks','booking_histories.created_at', 'booking_histories.approval', 'booking_histories.total_passenger', 'booking_histories.destination', 'booking_histories.purpose', 'attachments.filepath', 'vehicles.model', 'vehicles.plate', 'vehicles.type')
+        $histories = booking_history::select('users.name', 'users.email', 'users.position', 'users.matrik', 'users.phone', 'users.faculty', 'booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date','booking_histories.remarks','booking_histories.created_at', 'booking_histories.approval', 'booking_histories.total_passenger', 'booking_histories.destination', 'booking_histories.purpose', 'attachments.filepath', 'vehicles.model', 'vehicles.plate', 'vehicles.type')
             ->leftJoin('users', 'booking_histories.user_id', '=', 'users.id')
             ->leftJoin('vehicles', 'vehicles.id', '=', 'booking_histories.car_id')
             ->join('attachments', 'booking_histories.attachment_id', '=', 'attachments.id');

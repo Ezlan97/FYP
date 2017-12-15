@@ -39,6 +39,7 @@
                                 <option value="" disabled selected>Select</option>
                                 <option value="Student">Student</option>
                                 <option value="Lecture">Lecture</option>
+                                <option value="Staff">Staff</option>
                             </select>
                         </div>
                         <div class="form-group">

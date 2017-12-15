@@ -31,6 +31,10 @@
 				<input type="text" value="{{ Auth::user()->name }}" class="form-control" name="name" readonly="">
 			</div>
 			<div class="form-group col-md-10 col-md-offset-1">
+				<label for="name">Position:</label>
+				<input type="text" value="{{ Auth::user()->position }}" class="form-control" name="position" readonly="">
+			</div>
+			<div class="form-group col-md-10 col-md-offset-1">
 				<label for="name">Email:</label>
 				<input type="text" value="{{ Auth::user()->email }}" class="form-control" name="email" readonly="">
 			</div>
