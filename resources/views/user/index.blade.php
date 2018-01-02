@@ -46,9 +46,9 @@
 								<th> Purpose </th>
 								<th> Departure Date </th>
 								<th> Return Date </th>
-								<th> Booking Date </th>
 								<th> Status </th>
 								<th> Remarks </th>
+								<th> Update </th>
 							</tr>
 						</thead>
 						<tbody>
@@ -62,7 +62,6 @@
 								<td> {{ $history->purpose }}</td>
 								<td> {{ $history->start_date }}</td>
 								<td> {{ $history->end_date }}</td>
-								<td> {{ $history->created_at }}</td>
 								<td>
 									<span
 									class="label min-width-100px
@@ -79,9 +78,14 @@
 								</span>
 							</td>
 							<td>
-								<a href="" class="showRemarks" data-toggle="modal" data-target="#remarksModal" data-remarks="{{ $history->remarks }}">
+								<a class="btn btn-warning" data-toggle="modal" data-target="#remarksModal{{ $history->history_id }}">
 									<i class="fa fa-list"></i>
 									View Remarks
+								</a>
+							</td>
+							<td>
+								<a class="btn btn-info" data-toggle="modal" data-target="#updatePost{{ $history->history_id }}">
+									<i class="fa fa-pencil" aria-hidden="true">Update</i>
 								</a>
 							</td>
 						</tr>
@@ -140,7 +144,8 @@
 </div>
 <!-- End modal -->
 <!-- Modal -->
-<div id="remarksModal" class="modal fade" role="dialog">
+@foreach($histories as $history)
+<div id="remarksModal{{ $history->history_id }}" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<!-- Modal content-->
 		<div class="modal-content">
@@ -151,9 +156,9 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="form-group col-md-12">
-						<textarea id="m_remarks" class="form-control" readonly=""></textarea>
+						<textarea class="form-control" placeholder="">{{ $history->remarks }}</textarea>
 					</div>
-					
+
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -162,7 +167,92 @@
 		</div>
 	</div>
 </div>
+@endforeach
 <!-- End Modal -->
+
+@foreach($histories as $history)
+<div class="modal fade" id="updatePost{{ $history->history_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Update Booking</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" method="POST" action="{{ route('booking.update', $history->id ) }}" enctype="multipart/form-data">
+					{{ method_field('PATCH')}} {{ csrf_field() }}
+					<div class="col-md-8 col-md-offset-2">
+						<div class="form-group">
+							<label for="name">Name:</label>
+							<input type="text" value="{{ Auth::user()->name }}" class="form-control" name="name" readonly="">
+						</div>
+						<div class="form-group">
+							<label for="name">Position:</label>
+							<input type="text" value="{{ Auth::user()->position }}" class="form-control" name="position" readonly="">
+						</div>
+						<div class="form-group">
+							<label for="name">Email:</label>
+							<input type="text" value="{{ Auth::user()->email }}" class="form-control" name="email" readonly="">
+						</div>
+						<div class="form-group">
+							<label for="name">Faculty:</label>
+							<input type="text" value="{{ Auth::user()->faculty }}" class="form-control" name="faculty" readonly="">
+						</div>
+						<div class="form-group">
+							<label for="name">Purpose:</label>
+							<select class="form-control" name="purpose">
+								<option value="Conference">Conference</option>
+								<option value="Camp">Camp</option>
+								<option value="Trip">Trip</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="name">Destination address:</label>
+							<textarea name="destination" class="form-control">{{ $history->destination }}</textarea>
+						</div>
+						<div class="form-group">
+							<label for="name">Total Passenger:</label>
+							<input type="text" value="{{ $history->total_passenger }}" class="form-control" name="total_passenger" required>
+						</div>
+						<div class="form-group">
+							<label for="inputPassword1" class="control-label">Departure Date</label>
+							<div class="input-group">
+								<input type="text" class="form-control" readonly name="start_date" value="{{ $history->start_date }}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputPassword1" class="control-label">Return Date</label>
+							<div class="input-group">
+								<input type="text" class="form-control" readonly name="end_date" value="{{ $history->end_date }}">
+							</div>
+						</div>
+						<div class="form-group text-center">
+							<h1>Second step</h1>
+							<p>Upload your documents</p>
+							<hr>
+						</div>
+
+						<div class="form-group">
+							<!-- <label for="inputPassword1" class="control-label">Upload file</label> -->
+							<input class="form-control input-line input-medium" type="file" name="attachment" id="fileToUpload">
+						</div>
+						<div>
+							<div class="form-group text-center">
+								<!-- <label for="inputPassword1" class="control-label">Upload file</label> -->
+								<input class="btn btn-success" type="submit" value="Book Now">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+@endforeach
+
+
 @stop
 @section('script')
 <script>
@@ -177,9 +267,7 @@
 		}
 	}
 	$(document).ready(function(){
-		$('.showRemarks').click(function(){
-			$("textarea#m_remarks").val($(this).data('remarks'));
-		});
+
 		$(".submitDate").click(function(event){
 			var isValid = true;
 			if($('#e_date').val() == '' || $('#s_date').val() == '')

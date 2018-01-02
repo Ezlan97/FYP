@@ -11,10 +11,10 @@
 	</div>
 </header>
 <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/homepage">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{ url('login') }}">Login</a></li>
-    <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-    <li class="breadcrumb-item active">Book</a></li>
+	<li class="breadcrumb-item"><a href="/homepage">Home</a></li>
+	<li class="breadcrumb-item"><a href="{{ url('login') }}">Login</a></li>
+	<li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
+	<li class="breadcrumb-item active">Book</a></li>
 </ol>
 <div class="container-fluid" style="padding-top: 35px; padding-bottom: 35px;">
 	<div class="col-md-6 col-md-offset-3 well">
@@ -37,6 +37,10 @@
 			<div class="form-group col-md-10 col-md-offset-1">
 				<label for="name">Email:</label>
 				<input type="text" value="{{ Auth::user()->email }}" class="form-control" name="email" readonly="">
+			</div>
+			<div class="form-group col-md-10 col-md-offset-1">
+				<label for="name">Faculty:</label>
+				<input type="text" value="{{ Auth::user()->faculty }}" class="form-control" name="faculty" readonly="">
 			</div>
 			<div class="form-group col-md-10 col-md-offset-1">
 				<label for="name">Purpose:</label>
@@ -108,7 +112,7 @@
 		"{{Session::get('message')}}",
 		'success'
 		)
-</script>
-@endif
-@include('errors.validation-errors')
-@stop
+	</script>
+	@endif
+	@include('errors.validation-errors')
+	@stop

@@ -77,5 +77,6 @@ Route::group(['middleware'=>['auth', 'checkRole:2']], function(){
 	Route::get('user', ['uses'=>'UserController@index'])->name('user.index');
 	Route::post('user/booking', ['uses'=>'UserController@booking'])->name('user.booking');
 	Route::post('user/view-available-booking', ['uses'=>'UserController@showAvailableBooking'])->name('user.view-available-booking');
+	Route::patch('user/{id}', 'UserController@update')->name('booking.update');
 
 });

@@ -165,6 +165,55 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('message', 'Your booking is successful! Please wait for admin approval!');
     }
 
+    public function update(UserBookingRequest $request, $id)
+    {
+
+       //Get all request and store in variable
+        $history = booking_history::findOrFail($id);
+
+        //Store receipt
+        //If attachment is not empty
+        if(!empty($history['attachment'])){
+
+            $file = $history['attachment'];
+
+            //Add time to original name of file to make it unique
+            $name = time() . $file->getClientOriginalName();
+
+            //Move the file to the directory attachment @ thisprojecttitle/public/attachment/
+            $file->move('attachment', $name);
+
+            //create attachement info on DB @ attachment_name
+            $attachment = Attachment::create(['filepath'=>$name]);
+
+            //Store attachment_id in $input to be stored in booking_history
+            $history['attachment_id'] = $attachment->id;
+        }
+
+
+        //Convert start date and end date to date format
+        $start_date = strtotime($history['start_date']);
+        $start_date = date('Y-m-d',$start_date);
+
+        $end_date = strtotime($history['end_date']);
+        $end_date = date('Y-m-d',$end_date);
+        
+        //Store array with value required on DB
+        $history['start_date'] = $history['start_date'];
+        $history['end_date'] = $history['end_date'];
+        $history['user_id'] = Auth::user()->id;
+        $history['car_id'] = 0;
+        $history['destination'] = $history['destination'];
+        $history['purpose'] = $history['purpose'];
+        $history['remarks'] = '';
+        $history['total_passenger'] = $history['total_passenger'];
+        $history['approval'] = 0;
+
+        $history->save();
+
+        return back()->with('message', 'Your booking is successfully update! Please wait for admin approval!');
+    }
+
     public function showAvailableBooking(Request $request){
 
         //Get start date and end date

@@ -103,7 +103,7 @@
 		                            </a>
 	                            </td>
 	                            <td>
-		                            <a class="btn btn-primary btnPrint" href="{{ $directory.$history->filepath }}">
+		                            <a class="btn btn-primary btnPrint1" href="{{ $directory.$history->filepath }}">
 		                            	Print
 		                            </a>
 	                            </td>

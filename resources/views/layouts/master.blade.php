@@ -123,8 +123,8 @@
 							<p>&copy; 2017 Kuis Transportation Booking System. All rights reserved.</p>
 						</div>
 						<div class="col-sm-6 text-right">
-							<p>Created with
-							<3 by Shuhadah!</p>
+							<p>Created
+							 by Shuhadah</p>
 						</div>
 					</div>
 				</div>
@@ -190,7 +190,7 @@
 	</script>
 	<script>
 	$(document).ready(function() {
-	$(".btnPrint").printPage();
+	$(".btnPrint1").printPage();
 	});
 	</script>
 	@yield('script')
