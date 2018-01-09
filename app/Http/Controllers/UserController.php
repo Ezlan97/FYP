@@ -9,6 +9,7 @@ use App\Http\Requests\UserBookingRequest;
 
 use Auth;
 use DB;
+use Storage;
 
 use App\Attachment;
 use App\booking_history;
@@ -68,7 +69,7 @@ class UserController extends Controller
     public function index(){
 
         //Query to select booking history based on current logged on user id
-        $histories = booking_history::select('users.name', 'users.email','booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date','booking_histories.created_at', 'booking_histories.approval', 'booking_histories.destination', 'booking_histories.remarks', 'booking_histories.purpose', 'attachments.filepath', 'vehicles.model')
+        $histories = booking_history::select('users.name', 'users.email','booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date','booking_histories.created_at', 'booking_histories.approval', 'booking_histories.destination', 'booking_histories.total_passenger', 'booking_histories.remarks', 'booking_histories.purpose', 'attachments.filepath', 'booking_histories.attachment_id as attachment', 'vehicles.model')
             ->leftJoin('users', 'booking_histories.user_id', '=', 'users.id')
             ->leftJoin('vehicles', 'vehicles.id', '=', 'booking_histories.car_id')
             ->join('attachments', 'booking_histories.attachment_id', '=', 'attachments.id')
@@ -165,20 +166,20 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('message', 'Your booking is successful! Please wait for admin approval!');
     }
 
-    public function update(UserBookingRequest $request, $id)
+    public function update(Request $request)
     {
 
-       //Get all request and store in variable
-        $history = booking_history::findOrFail($id);
+        //Get all request and store in variable
+        $input = $request->all();
 
         //Store receipt
         //If attachment is not empty
-        if(!empty($history['attachment'])){
+        if(!empty($input['attachment'])){
 
-            $file = $history['attachment'];
+            $file = $input['attachment'];
 
             //Add time to original name of file to make it unique
-            $name = time() . $file->getClientOriginalName();
+            $name = time() . $file->getClientOriginalName();;
 
             //Move the file to the directory attachment @ thisprojecttitle/public/attachment/
             $file->move('attachment', $name);
@@ -187,31 +188,41 @@ class UserController extends Controller
             $attachment = Attachment::create(['filepath'=>$name]);
 
             //Store attachment_id in $input to be stored in booking_history
-            $history['attachment_id'] = $attachment->id;
+            $input['attachment_id'] = $attachment->id;
         }
 
+        if(empty($input['attachment'])){
+
+            $input['attachment_id'] = $input['attachment_id'];
+
+        }
 
         //Convert start date and end date to date format
-        $start_date = strtotime($history['start_date']);
+        $start_date = strtotime($input['start_date']);
         $start_date = date('Y-m-d',$start_date);
 
-        $end_date = strtotime($history['end_date']);
+        $end_date = strtotime($input['end_date']);
         $end_date = date('Y-m-d',$end_date);
         
         //Store array with value required on DB
-        $history['start_date'] = $history['start_date'];
-        $history['end_date'] = $history['end_date'];
-        $history['user_id'] = Auth::user()->id;
-        $history['car_id'] = 0;
-        $history['destination'] = $history['destination'];
-        $history['purpose'] = $history['purpose'];
-        $history['remarks'] = '';
-        $history['total_passenger'] = $history['total_passenger'];
-        $history['approval'] = 0;
+        $input['start_date'] = $input['start_date'];
+        $input['end_date'] = $input['end_date'];
+        $input['user_id'] = Auth::user()->id;
+        $input['car_id'] = 0;
+        $input['destination'] = $input['destination'];
+        $input['purpose'] = $input['purpose'];
+        $input['remarks'] = '';
+        $input['total_passenger'] = $input['total_passenger'];
+        $input['approval'] = 0;
 
-        $history->save();
+        //Store history info
+        $history = booking_history::create($input);
 
-        return back()->with('message', 'Your booking is successfully update! Please wait for admin approval!');
+        //delete old booking
+        $oldBooking = booking_history::findOrFail($request->id);
+        $oldBooking->delete();
+
+        return redirect()->route('user.index')->with('message', 'Your booking is successfully updated! Please wait for admin approval!');
     }
 
     public function showAvailableBooking(Request $request){

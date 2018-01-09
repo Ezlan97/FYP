@@ -47,8 +47,8 @@
 								<th> Departure Date </th>
 								<th> Return Date </th>
 								<th> Status </th>
-								<th> Remarks </th>
-								<th> Update </th>
+								<th> </th>
+								<th> </th>
 							</tr>
 						</thead>
 						<tbody>
@@ -60,8 +60,8 @@
 								<td><b>{{$count + $currentPageTotalNumber}}</b></td>
 								<td> {{ $history->destination }}</td>
 								<td> {{ $history->purpose }}</td>
-								<td> {{ $history->start_date }}</td>
-								<td> {{ $history->end_date }}</td>
+								<td> {{ date('M j, Y H:i a', strtotime( $history->start_date )) }} </td>
+								<td> {{ date('M j, Y H:i a', strtotime( $history->end_date )) }} </td>
 								<td>
 									<span
 									class="label min-width-100px
@@ -80,12 +80,18 @@
 							<td>
 								<a class="btn btn-warning" data-toggle="modal" data-target="#remarksModal{{ $history->history_id }}">
 									<i class="fa fa-list"></i>
-									View Remarks
+									Message
 								</a>
 							</td>
 							<td>
-								<a class="btn btn-info" data-toggle="modal" data-target="#updatePost{{ $history->history_id }}">
-									<i class="fa fa-pencil" aria-hidden="true">Update</i>
+								<a href="" class="btn btn-primary editBtn" data-toggle="modal" data-target="#editModal" data-history_id="{{ $history->history_id }}" 
+									data-history_destination="{{ $history->destination }}" 
+									data-history_purpose="{{ $history->purpose }}" 
+									data-history_start="{{ $history->start_date }}" 
+									data-history_end="{{ $history->end_date }}"
+									data-history_attachment="{{ $history->attachment }}"
+									data-history_total_passenger="{{ $history->total_passenger }}">
+									<i class="fa fa-list">Update</i>
 								</a>
 							</td>
 						</tr>
@@ -108,7 +114,16 @@
 	</div>
 </div>
 </div>
-<!-- Modal -->
+
+
+
+
+{{-- MODAL --}}
+
+
+
+
+<!-- Booking Modal -->
 <div id="createModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<!-- Modal content-->
@@ -143,7 +158,9 @@
 	</div>
 </div>
 <!-- End modal -->
-<!-- Modal -->
+
+
+<!-- Remark Modal -->
 @foreach($histories as $history)
 <div id="remarksModal{{ $history->history_id }}" class="modal fade" role="dialog">
 	<div class="modal-dialog">
@@ -156,9 +173,8 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="form-group col-md-12">
-						<textarea class="form-control" placeholder="">{{ $history->remarks }}</textarea>
+						<p>{{ $history->remarks }}</p>
 					</div>
-
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -170,87 +186,77 @@
 @endforeach
 <!-- End Modal -->
 
-@foreach($histories as $history)
-<div class="modal fade" id="updatePost{{ $history->history_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
+
+<!-- Update Modal -->
+<div id="editModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Update Booking</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Update Booking</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" method="POST" action="{{ route('booking.update', $history->id ) }}" enctype="multipart/form-data">
-					{{ method_field('PATCH')}} {{ csrf_field() }}
-					<div class="col-md-8 col-md-offset-2">
-						<div class="form-group">
-							<label for="name">Name:</label>
-							<input type="text" value="{{ Auth::user()->name }}" class="form-control" name="name" readonly="">
-						</div>
-						<div class="form-group">
-							<label for="name">Position:</label>
-							<input type="text" value="{{ Auth::user()->position }}" class="form-control" name="position" readonly="">
-						</div>
-						<div class="form-group">
-							<label for="name">Email:</label>
-							<input type="text" value="{{ Auth::user()->email }}" class="form-control" name="email" readonly="">
-						</div>
-						<div class="form-group">
-							<label for="name">Faculty:</label>
-							<input type="text" value="{{ Auth::user()->faculty }}" class="form-control" name="faculty" readonly="">
-						</div>
-						<div class="form-group">
-							<label for="name">Purpose:</label>
-							<select class="form-control" name="purpose">
-								<option value="Conference">Conference</option>
-								<option value="Camp">Camp</option>
-								<option value="Trip">Trip</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="name">Destination address:</label>
-							<textarea name="destination" class="form-control">{{ $history->destination }}</textarea>
-						</div>
-						<div class="form-group">
-							<label for="name">Total Passenger:</label>
-							<input type="text" value="{{ $history->total_passenger }}" class="form-control" name="total_passenger" required>
-						</div>
-						<div class="form-group">
-							<label for="inputPassword1" class="control-label">Departure Date</label>
-							<div class="input-group">
-								<input type="text" class="form-control" readonly name="start_date" value="{{ $history->start_date }}">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputPassword1" class="control-label">Return Date</label>
-							<div class="input-group">
-								<input type="text" class="form-control" readonly name="end_date" value="{{ $history->end_date }}">
-							</div>
-						</div>
-						<div class="form-group text-center">
-							<h1>Second step</h1>
-							<p>Upload your documents</p>
-							<hr>
-						</div>
-
-						<div class="form-group">
-							<!-- <label for="inputPassword1" class="control-label">Upload file</label> -->
-							<input class="form-control input-line input-medium" type="file" name="attachment" id="fileToUpload">
-						</div>
-						<div>
-							<div class="form-group text-center">
-								<!-- <label for="inputPassword1" class="control-label">Upload file</label> -->
-								<input class="btn btn-success" type="submit" value="Book Now">
-							</div>
+				<div class="row">
+					{!! Form::open(['method'=>'POST', 'action'=>'UserController@update', 'files'=>true]) !!}
+					<div class="form-group col-md-12">
+						<label for="inputPassword1" class="col-md-4 control-label">Destination</label>
+						<div class="col-md-8">
+							<input type="text" name="destination" class="form-control input-line" id="m_history_destination">
 						</div>
 					</div>
-				</form>
+					<div class="form-group col-md-12">
+						<label for="inputPassword1" class="col-md-4 control-label">Purpose</label>
+						<div class="col-md-8">
+							<input type="text" name="purpose" class="form-control input-line" id="m_history_purpose">
+						</div>
+					</div>
+					<div class="form-group col-md-12">
+						<label for="inputPassword1" class="col-md-4 control-label">Total Passanger</label>
+						<div class="col-md-8">
+							<input type="text" name="total_passenger" class="form-control input-line" id="m_history_total_passenger">
+						</div>
+					</div>
+					<div class="form-group col-md-12">
+						<label for="inputPassword1" class="col-md-4 control-label">Start Date</label>
+						<div class="col-md-8">
+							<input type="text" name="start_date" class="form-control input-line" placaeholder="m_history_start" id="date_start1">
+						</div>
+					</div>
+					<div class="form-group col-md-12">
+						<label for="inputPassword1" class="col-md-4 control-label">End Date</label>
+						<div class="col-md-8">
+							<input type="text" name="end_date" class="form-control input-line" placaeholder="m_history_end" id="date_end2">
+						</div>
+					</div>
+					<div class="form-group col-md-12">
+						<label for="inputPassword1" class="col-md-4 control-label">Documents</label>
+						<div class="col-md-8">
+							<input class="form-control input-line input-medium" type="file" name="attachment" id="fileToUpload">
+							<small id="passwordHelpBlock" class="form-text text-muted">
+								Optional
+							</small>
+						</div>
+					</div>
+					<div class="form-group">
+						<input type="hidden" name="id" id="m_history_id">
+						<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+						<input type="hidden" name="car_id" value="0">
+						<input type="hidden" name="remarks" value="">
+						<input type="hidden" name="approval" value="0">
+						<input type="hidden" name="attachment_id" id="m_history_attachment">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Update</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					{!! Form::close() !!}
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-@endforeach
+<!-- End Modal -->
 
 
 @stop
@@ -266,6 +272,7 @@
 			window.location.href = '/user?status=' + $( "#filter_status" ).val();
 		}
 	}
+
 	$(document).ready(function(){
 
 		$(".submitDate").click(function(event){
@@ -284,6 +291,18 @@
 				event.preventDefault();
 			}
 		});
+	});
+
+	$('.editBtn').click(function(){
+		var roles_id = $(this).data('roles_id');
+		var faculties_id = $(this).data('faculties_id');
+		$("#m_history_id").val($(this).data('history_id'));
+		$("#m_history_purpose").val($(this).data('history_purpose'));
+		$("#m_history_destination").val($(this).data('history_destination'));
+		$("#m_history_total_passenger").val($(this).data('history_total_passenger'));
+		$("#m_history_start").val($(this).data('history_start'));
+		$("#m_history_end").val($(this).data('history_end'));
+		$("#m_history_attachment").val($(this).data('history_attachment'));
 	});
 </script>
 @if(Session::has('message'))

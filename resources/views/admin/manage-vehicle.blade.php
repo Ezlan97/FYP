@@ -81,7 +81,9 @@
 	<div class="col-md-5 col-md-offset-5">
 		<a href="" id="createButton" data-toggle="modal" data-target="#createModal"><button class="btn btn-lg btn-success">Create New Vehicle</button></a>
 	</div>
-	<!-- Modal -->
+
+
+	<!-- update vehicle Modal -->
 	<div id="editModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -106,21 +108,27 @@
 							</div>
 						</div>
 						<div class="form-group col-md-12 dropdown">
-							<label for="inputPassword1" class="col-md-4 control-label">Type</label>
-							<div class="col-md-8">
-								<select class="form-control" name="type" required>
-									<option value="" disabled selected>Select</option>
-									<option value="FSTM">FSTM</option>
-									<option value="FPM">FPM</option>
-									<option value="FP">FP</option>
-									<option value="FSU">FSU</option>
-									<option value="PA">PA</option>
-									<option value="FPPI">FPPI</option>
-									<option value="PPT">PPT</option>
-									<option value="PPS">PPS</option>
-								</select>
-							</div>
+						<label for="inputPassword1" class="col-md-4 control-label">Type</label>
+						<div class="col-md-8">
+							<select class="form-control" name="type" id="vplate" value="{{ old('type') }}" required>
+								<option value="" disabled selected>Select</option>
+								<option value="Car">Car</option>
+								<option value="Bus">Bus</option>
+								<option value="Van">Van</option>
+							</select>
 						</div>
+					</div>
+					<div class="form-group col-md-12 dropdown">
+						<label for="inputPassword1" class="col-md-4 control-label">Color</label>
+						<div class="col-md-8">
+							<select class="form-control" name="color" id="vplate" value="{{ old('type') }}" required>
+								<option value="" disabled selected>Select</option>
+								<option value="#87CEFA" style="background:#87CEFA; color: #ffffff;">Car</option>
+								<option value="#FFB6C1" style="background:#FFB6C1; color: #ffffff;">Bus</option>
+								<option value="#7FFFD4" style="background:#7FFFD4; color: #ffffff;">Van</option>
+							</select>
+						</div>
+					</div>
 						<input type="hidden" name="id" id="m_vehicle_id">
 					</div>
 				</div>
@@ -134,7 +142,9 @@
 	</div>
 </div>
 <!-- End Modal -->
-<!-- Modal -->
+
+
+<!-- Create vehicle Modal -->
 <div id="createModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<!-- Modal content-->
