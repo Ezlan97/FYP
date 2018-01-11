@@ -71,7 +71,7 @@
 								<td><b>{{$count + $currentPageTotalNumber}} </b></td>
 								<td> {{ $history->name }} </td>
 								<td> {{ $history->position }} </td>
-								<td> {{ $history->model }} </td>
+								<td> {{ $history->title }} </td>
 								<td> {{ $history->destination }} </td>
 								<td> {{ $history->purpose }} </td>
 								<td class="text-center"> {{ $history->total_passenger }} </td>
@@ -246,7 +246,7 @@
 					<div class="form-group col-md-12">
 						<label for="inputPassword1" class="col-md-4 control-label">Vehicle Model :</label>
 						<div class="col-md-8">
-							<p>{{ $history->model }}</p>
+							<p>{{ $history->title }}</p>
 						</div>
 					</div>
 
@@ -311,7 +311,7 @@
 					<div class="form-group col-md-12">
 						<label for="inputPassword1" class="col-md-4 control-label">Model</label>
 						<div class="col-md-8">
-							<input type="text" name="model" class="form-control input-line" id="m_vehicle_model" disabled>
+							<input type="text" name="title" class="form-control input-line" id="m_vehicle_model" disabled>
 						</div>
 					</div>
 					<div class="form-group col-md-12">

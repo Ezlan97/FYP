@@ -5,7 +5,7 @@
 <head>
 	<?php date_default_timezone_set("Asia/Kuala_Lumpur"); ?>
 	<meta charset="utf-8"/>
-	<title>AHDA</title>
+	<title>KUIS - Transportation Booking System</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta content="width=device-width, initial-scale=1" name="viewport"/>
 	<meta content="" name="description"/>
@@ -54,6 +54,7 @@
 		justify-content: center;
 		flex-wrap: wrap;
 	}
+	
 	@media print {
 		body.modalprinter * {
 			visibility: hidden;

@@ -10,13 +10,13 @@ class Event extends Model
      * [$table description]
      * @var string
      */
-    protected $table = 'events';
+    protected $table = 'vehicles';
 
     /**
      * [$fillable description]
      * @var [type]
      */
     protected $fillable = [
-        'model', 'plate', 'type', 'start', 'end', 'color'
+        'title', 'plate', 'type', 'start', 'end', 'color'
     ];
 }

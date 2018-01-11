@@ -4,13 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>fullCalendar and Laravel 5.3</title>
+    <title>KUIS Vehicle Booking System</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/one-page-wonder.css" rel="stylesheet">
     {!! Html::style('vendor/seguce92/fullcalendar/fullcalendar.min.css') !!}
-    {!! Html::style('vendor/seguce92/bootstrap-datetimepicker/css/bootstrap-material-datetimepicker.css') !!}
-    {!! Html::style('vendor/seguce92/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') !!}
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -70,32 +68,29 @@
                             </div>
                             <div class="col-sm-6 text-right">
                                 <p>Created with
-                                    <3 by Shuhadah!</p>
-                                    </div>
-                                </div>
+                                by Shuhadah</p>
                             </div>
                         </div>
                     </div>
-                </footer>
-                <!-- Bootstrap core JavaScript -->
-                <script src="vendor/jquery/jquery.min.js"></script>
-                <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-            </body>
-            {!! Html::script('vendor/seguce92/jquery.min.js') !!}
-            {!! Html::script('vendor/seguce92/bootstrap/js/bootstrap.min.js') !!}
-            {!! Html::script('vendor/seguce92/fullcalendar/lib/moment.min.js') !!}
-            {!! Html::script('vendor/seguce92/fullcalendar/fullcalendar.min.js') !!}
-            {!! Html::script('vendor/seguce92/bootstrap-datetimepicker/js/bootstrap-material-datetimepicker.js') !!}
-            {!! Html::script('vendor/seguce92/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') !!}
-            <script>
-                var BASEURL = "{{ url('/') }}";
-                $(document).ready(function() {
-                    $('#calendar').fullCalendar({
-                        header: {
-                            left: 'next today',
-                            center: 'title',
-                            right: 'month,basicWeek,basicDay'
-                        },
+                </div>
+            </div>
+        </footer>
+    </body>
+    {!! Html::script('vendor/seguce92/jquery.min.js') !!}
+    {!! Html::script('vendor/seguce92/bootstrap/js/bootstrap.min.js') !!}
+    {!! Html::script('vendor/seguce92/fullcalendar/lib/moment.min.js') !!}
+    {!! Html::script('vendor/seguce92/fullcalendar/fullcalendar.min.js') !!}
+    <script>
+        var BASEURL = "{{ url('/') }}";
+        $(document).ready(function() {
+            $('#calendar').fullCalendar(
+            {
+                title: 'model',
+                header: {
+                    left: 'next today',
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay'
+                },
                 navLinks: true, // can click day/week names to navigate views
                 editable: true,
                 selectable: true,
@@ -111,7 +106,7 @@
                     var time_start = $.fullCalendar.moment(event.start).format('hh:mm:ss');
                     var date_end = $.fullCalendar.moment(event.end).format('YYYY-MM-DD hh:mm:ss');
                     $('#modal-event #delete').attr('data-id', event.id);
-                    $('#modal-event #_title').val(vehicle.model);
+                    $('#modal-event #_title').val(vehicle.title);
                     $('#modal-event #_date_start').val(date_start);
                     $('#modal-event #_time_start').val(time_start);
                     $('#modal-event #_date_end').val(date_end);
@@ -119,33 +114,22 @@
                     $('#modal-event').modal('show');
                 }
             });
-                });
-                $('.colorpicker').colorpicker();
-                $('#time_start').bootstrapMaterialDatePicker({
-                    date: false,
-                    shortTime: false,
-                    format: 'HH:mm:ss'
-                });
-                $('#date_end').bootstrapMaterialDatePicker({
-                    date: true,
-                    shortTime: false,
-                    format: 'YYYY-MM-DD HH:mm:ss'
-                });
-                $('#delete').on('click', function(){
-                    var x = $(this);
-                    var delete_url = x.attr('data-href')+'/'+x.attr('data-id');
-                    $.ajax({
-                        url: delete_url,
-                        type: 'PATCH',
-                        success: function(result){
-                            $('#modal-event').modal('hide');
-                            alert(result.message);
-                        },
-                        error: function(result){
-                            $('#modal-event').modal('hide');
-                            alert(result.message);
-                        }
-                    });
-                });
-            </script>
-            </html>
+        });
+        $('#delete').on('click', function(){
+            var x = $(this);
+            var delete_url = x.attr('data-href')+'/'+x.attr('data-id');
+            $.ajax({
+                url: delete_url,
+                type: 'PATCH',
+                success: function(result){
+                    $('#modal-event').modal('hide');
+                    alert(result.message);
+                },
+                error: function(result){
+                    $('#modal-event').modal('hide');
+                    alert(result.message);
+                }
+            });
+        });
+    </script>
+    </html>

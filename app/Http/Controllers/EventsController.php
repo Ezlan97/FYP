@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Event;
 use App\vehicle;
+use App\Event;
 
 class EventsController extends Controller
 {
@@ -15,7 +15,8 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $data = Vehicle::get(['model', 'plate', 'type', 'start', 'end', 'color']);
+        $data = vehicle::get(['id', 'title', 'start', 'end', 'color']);
+         // dd($data);
 
         return Response()->json($data);
     }
@@ -38,7 +39,7 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        $event = new Event();
+        $event = new Vehicle();
         $event->title = $request->title;
         $event->start = $request->date_start . ' ' . $request->time_start;
         $event->end = $request->date_end;
@@ -90,7 +91,7 @@ class EventsController extends Controller
      */
     public function destroy($id)
     {
-        $event = Event::find($id);
+        $event = Vehicle::find($id);
 
         if($event == null)
             return Response()->json([

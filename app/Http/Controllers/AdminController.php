@@ -131,9 +131,8 @@ class AdminController extends Controller
         $vehicle = vehicle::findOrFail($input['id']);
 
         //Store array with value required on DB
-        $vehicle->model = $input['model'];
+        $vehicle->title = $input['title'];
         $vehicle->plate = $input['plate'];
-        $vehicle->type = $input['type'];
 
         //Save the vehicle updated info
         $vehicle->save();
@@ -177,7 +176,7 @@ class AdminController extends Controller
         $vehicle = vehicle::find($vehicle_id);
 
         //Get all booking history of vehicle based on vehicle id
-        $histories = booking_history::select('users.name', 'users.email','booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date','booking_histories.created_at', 'booking_histories.approval', 'booking_histories.destination', 'booking_histories.purpose', 'attachments.filepath', 'vehicles.model')
+        $histories = booking_history::select('users.name', 'users.email','booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date','booking_histories.created_at', 'booking_histories.approval', 'booking_histories.destination', 'booking_histories.purpose', 'attachments.filepath', 'vehicles.title')
             ->leftJoin('users', 'booking_histories.user_id', '=', 'users.id')
             ->join('vehicles', 'vehicles.id', '=', 'booking_histories.car_id')
             ->join('attachments', 'booking_histories.attachment_id', '=', 'attachments.id');
@@ -201,7 +200,7 @@ class AdminController extends Controller
         $directory = '/attachment/';
 
         //Get all booking histories info
-        $histories = booking_history::select('users.name', 'users.email', 'users.position', 'users.matrik', 'users.phone', 'users.faculty', 'booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date','booking_histories.remarks','booking_histories.created_at', 'booking_histories.approval', 'booking_histories.total_passenger', 'booking_histories.destination', 'booking_histories.purpose', 'attachments.filepath', 'vehicles.model', 'vehicles.plate', 'vehicles.type')
+        $histories = booking_history::select('users.name', 'users.email', 'users.position', 'users.matrik', 'users.phone', 'users.faculty', 'booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date','booking_histories.remarks','booking_histories.created_at', 'booking_histories.approval', 'booking_histories.total_passenger', 'booking_histories.destination', 'booking_histories.purpose', 'attachments.filepath', 'vehicles.title', 'vehicles.plate', 'vehicles.type')
             ->leftJoin('users', 'booking_histories.user_id', '=', 'users.id')
             ->leftJoin('vehicles', 'vehicles.id', '=', 'booking_histories.car_id')
             ->join('attachments', 'booking_histories.attachment_id', '=', 'attachments.id');
@@ -285,7 +284,7 @@ class AdminController extends Controller
     public function approveRejectConfirmation($booking_id){
 
         //Get all booking histories info
-        $histories = booking_history::select('users.name', 'users.email', 'users.matrik', 'users.phone', 'users.faculty', 'booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date','booking_histories.remarks','booking_histories.created_at', 'booking_histories.approval', 'booking_histories.total_passenger', 'booking_histories.destination', 'booking_histories.purpose', 'attachments.filepath', 'vehicles.model', 'vehicles.plate', 'vehicles.type')
+        $histories = booking_history::select('users.name', 'users.email', 'users.matrik', 'users.phone', 'users.faculty', 'booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date','booking_histories.remarks','booking_histories.created_at', 'booking_histories.approval', 'booking_histories.total_passenger', 'booking_histories.destination', 'booking_histories.purpose', 'attachments.filepath', 'vehicles.title', 'vehicles.plate', 'vehicles.type')
             ->leftJoin('users', 'booking_histories.user_id', '=', 'users.id')
             ->leftJoin('vehicles', 'vehicles.id', '=', 'booking_histories.car_id')
             ->join('attachments', 'booking_histories.attachment_id', '=', 'attachments.id')

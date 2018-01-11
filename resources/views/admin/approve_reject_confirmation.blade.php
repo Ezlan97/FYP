@@ -87,7 +87,7 @@
 				                        <tr>
 				                        	<td><p><input type="radio" name="car_id" value="{{ $vehicle->id }}" style="margin-left: 0px"></p></td>
 				                            <td>{{$count}}</td>
-				                            <td>{{ $vehicle->model }}</td>
+				                            <td>{{ $vehicle->title }}</td>
 											<td>{{ $vehicle->plate }}</td>
 											<td>{{ $vehicle->type }}</td>
 				                        </tr>

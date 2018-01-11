@@ -37,7 +37,7 @@ Vehicle Booking History
 			<div class="portlet-title">
 				<div class="caption">
 					<i class="icon-calendar font-white"></i>
-					<span class="h4">Vehicle Booking History : {{ $vehicle->model }}</span>
+					<span class="h4">Vehicle Booking History : {{ $vehicle->title }}</span>
 				</div>
 			</div>
 			<div class="portlet-body">
@@ -58,17 +58,6 @@ Vehicle Booking History
 							</tr>
 						</thead>
 						<tbody id="tbody">
-							<!--
-							<tr>
-								<td> 1 </td>
-								<td> Zakat Fitrah </td>
-								<td> 03-03-2017 </td>
-								<td> <button class="btn btn-transparent yellow-lemon btn-circle btn-sm active"> Download </button> </td>
-								<td>
-									<span class="label label-success"> Approved </span>
-								</td>
-							</tr>
-							-->
 							<?php $count = 1; ?>
 							@if(count($histories) > 0)
 							@foreach($histories as $history)
@@ -76,7 +65,7 @@ Vehicle Booking History
 							<tr>
 								<td><b>{{$count + $currentPageTotalNumber}}</b></td>
 								<td> {{ $history->name }}</td>
-								<td> {{ $history->model }}</td>
+								<td> {{ $history->title }}</td>
 								<td> {{ $history->destination }}</td>
 								<td> {{ $history->purpose }}</td>
 								<td> {{ $history->start_date }}</td>
