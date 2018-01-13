@@ -17,7 +17,6 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/clockface/css/clockface.css') }}"/>
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-datepicker/css/datepicker3.css') }}"/>
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}"/>
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-colorpicker/css/colorpicker.css') }}"/>
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css') }}"/>
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}"/>
 	<!-- END PAGE LEVEL STYLES -->
@@ -49,12 +48,24 @@
 	body {
 		padding-top: 0px;
 	}
+	
+	@media (min-width: 768px) {
+		.navbar-nav {
+			float: none;
+		}
+	}
+
 	.nav.navbar-nav {
+		color: #343A40;
 		display: flex;
 		justify-content: center;
 		flex-wrap: wrap;
 	}
-	
+
+	.nav-item {
+    margin-right: 26px;
+	}
+
 	@media print {
 		body.modalprinter * {
 			visibility: hidden;
@@ -97,27 +108,27 @@
 @yield('head')
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				@if(Auth::user()->roles_id>1)
-				<ul class="navbar-nav nav">
-					<li class="nav-item px-lg-4"><a class="nav-link" href="/homepage">Home</a></li>
-					<li class="nav-item px-lg-4"><a class="nav-link" href="calender">Check Booking Availability</a></li>
-					<li class="nav-item px-lg-4"><a class="nav-link" href="/admin">Booking</a></li>
-					<li class="nav-item px-lg-4"><a class="nav-link" href="{{ url('/logout') }}">Log Out</a></li>
-				</ul>
-				@else
-				<ul class="navbar-nav nav">
-					<li class="nav-item px-lg-4"><a class="nav-link" href="/homepage">Home</a></li>
-					<li class="nav-item px-lg-4"><a class="nav-link" href="/calender">Check Booking Availability</a></li>
-					<li class="nav-item px-lg-4"><a class="nav-link" href="/admin">Dashboard</a></li>
-					<li class="nav-item px-lg-4"><a class="nav-link" href="{{ url('/logout') }}">Log Out</a></li>
-				</ul>
-				@endif
-			</div>
-		</div>
-	</nav>
+	<nav class="navbar navbar-inverse navbar-fixed-top" style="padding-bottom: 3px; padding-top: 3px;">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                @if(Auth::user()->roles_id>1)
+                <ul class="navbar-nav nav" style="font-size: 16px">
+                    <li class="nav-item px-lg-4"><a class="nav-link" href="/homepage">Home</a></li>
+                    <li class="nav-item px-lg-4"><a class="nav-link" href="calender">Check Booking Availability</a></li>
+                    <li class="nav-item px-lg-4"><a class="nav-link" href="/admin">Booking</a></li>
+                    <li class="nav-item px-lg-4"><a class="nav-link" href="{{ url('/logout') }}">Log Out</a></li>
+                </ul>
+                @else
+                <ul class="navbar-nav nav" style="font-size: 16px">
+                    <li class="nav-item px-lg-4"><a class="nav-link" href="/homepage">Home</a></li>
+                    <li class="nav-item px-lg-4"><a class="nav-link" href="/calender">Check Booking Availability</a></li>
+                    <li class="nav-item px-lg-4"><a class="nav-link" href="/admin">Dashboard</a></li>
+                    <li class="nav-item px-lg-4"><a class="nav-link" href="{{ url('/logout') }}">Log Out</a></li>
+                </ul>
+                @endif
+            </div>
+        </div>
+    </nav>
 	@yield('content')
 </div>
 <!-- END CONTAINER -->
@@ -216,43 +227,7 @@
 {!! Html::script('vendor/seguce92/fullcalendar/lib/moment.min.js') !!}
 {!! Html::script('vendor/seguce92/fullcalendar/fullcalendar.min.js') !!}
 {!! Html::script('vendor/seguce92/bootstrap-datetimepicker/js/bootstrap-material-datetimepicker.js') !!}
-{!! Html::script('vendor/seguce92/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') !!}
 <script>
-	var BASEURL = "{{ url('/') }}";
-	$(document).ready(function() {
-		$('#calendar').fullCalendar({
-			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,basicWeek,basicDay'
-			},
-			navLinks: true, // can click day/week names to navigate views
-			editable: true,
-			selectable: true,
-			selectHelper: true,
-			select: function(start){
-				start = moment(start.format());
-				$('#responsive-modal').modal('show');
-			},
-
-			events: BASEURL + '/events',
-			eventClick: function(event, jsEvent, view){
-				var date_start = $.fullCalendar.moment(event.start).format('YYYY-MM-DD hh:mm:ss');
-				var date_end = $.fullCalendar.moment(event.end).format('YYYY-MM-DD hh:mm:ss');
-				$('#modal-event #delete').attr('data-id', event.id);
-				$('#modal-event #_title').val(event.title);
-				$('#modal-event #_date_start').val(date_start);
-				$('#modal-event #_time_start').val(time_start);
-				$('#modal-event #_date_end').val(date_end);
-				$('#modal-event #_color').val(event.color);
-				$('#modal-event').modal('show');
-			}
-		});
-	});
-
-
-	$('.colorpicker').colorpicker();
-
 
 	$('#date_start').bootstrapMaterialDatePicker({
 		date: true,
