@@ -14,7 +14,7 @@
   <li class="breadcrumb-item">Login</li>
   <li class="breadcrumb-item">Dashboard</li>
 </ol>
-<div class="container">
+{{-- <div class="container">
   <h1 class="my-4 text-center">Current Status</h1>
   <div class="row">
     <div class="col-lg-3 col-md-6 mb-4">
@@ -46,7 +46,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 <div class="container" style="padding-bottom: 40px;">
   <h1 class="my-4 text-center">Manage</h1>
   <!-- Marketing Icons Section -->

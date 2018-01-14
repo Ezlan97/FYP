@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\vehicle;
+use App\booking_history;
 use App\Event;
 
 class EventsController extends Controller
@@ -14,9 +15,16 @@ class EventsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $data = vehicle::get(['id', 'title', 'start', 'end', 'color']);
-         // dd($data);
+    {   
+         //Query to select booking history based on current logged on user id
+        $data = vehicle::select('booking_histories.destination', 'vehicles.title', 'vehicles.start', 'vehicles.end', 'vehicles.color')
+        ->leftJoin('booking_histories', 'booking_histories.car_id', '=', 'vehicles.id')->get();
+
+        foreach ($data as $all) {
+            if($all['destination'] == null ){
+                $all['color'] = '#000000';
+            }
+        }
 
         return Response()->json($data);
     }

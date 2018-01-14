@@ -202,7 +202,7 @@
 					<div class="form-group col-md-12">
 						<label for="inputPassword1" class="col-md-4 control-label">Destination</label>
 						<div class="col-md-8">
-							<input type="text" name="destination" class="form-control input-line" id="m_history_destination">
+							<textarea type="text" name="destination" class="form-control input-line" id="m_history_destination"></textarea>
 						</div>
 					</div>
 					<div class="form-group col-md-12">

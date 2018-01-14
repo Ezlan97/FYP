@@ -13,6 +13,8 @@ use Storage;
 
 use App\Attachment;
 use App\booking_history;
+use App\vehicle;
+
 
 class UserController extends Controller
 {

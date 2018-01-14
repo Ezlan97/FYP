@@ -97,18 +97,17 @@
                 selectHelper: true,
                 select: function(start){
                     start = moment(start.format());
-                    $('#date_start').val(start.format('YYYY-MM-DD'));
+                    $('#date_start').val(start.format('YYYY-MM-DD '));
                     $('#responsive-modal').modal('show');
                 },
                 events: BASEURL + '/events',
                 eventClick: function(event, jsEvent, view){
                     var date_start = $.fullCalendar.moment(event.start).format('YYYY-MM-DD');
-                    var time_start = $.fullCalendar.moment(event.start).format('hh:mm:ss');
-                    var date_end = $.fullCalendar.moment(event.end).format('YYYY-MM-DD hh:mm:ss');
+                    // var time_start = $.fullCalendar.moment(event.start).format('hh:mm:ss');
+                    var date_end = $.fullCalendar.moment(event.end).format('YYYY-MM-DD');
                     $('#modal-event #delete').attr('data-id', event.id);
                     $('#modal-event #_title').val(vehicle.title);
                     $('#modal-event #_date_start').val(date_start);
-                    $('#modal-event #_time_start').val(time_start);
                     $('#modal-event #_date_end').val(date_end);
                     $('#modal-event #_color').val(event.color);
                     $('#modal-event').modal('show');
