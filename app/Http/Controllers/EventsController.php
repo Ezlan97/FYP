@@ -15,14 +15,21 @@ class EventsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-         //Query to select booking history based on current logged on user id
-        $data = vehicle::select('booking_histories.destination', 'vehicles.title', 'vehicles.start', 'vehicles.end', 'vehicles.color')
-        ->leftJoin('booking_histories', 'booking_histories.car_id', '=', 'vehicles.id')->get();
+    {      
+
+        //Query to select booking history based on current logged on user id
+        $data = vehicle::select('booking_histories.destination', 'booking_histories.car_id', 'vehicles.title', 'vehicles.start', 'vehicles.end', 'vehicles.color')
+        ->leftJoin('booking_histories', 'booking_histories.car_id', '=', 'vehicles.id')
+        ->get();
 
         foreach ($data as $all) {
-            if($all['destination'] == null ){
-                $all['color'] = '#000000';
+            if($all['destination'] == null){
+                $all['title'] = null;
+                $all['start'] = null;
+                $all['end'] = null;
+                $all['color'] = null;
+                $all['car_id'] = null;
+                $all['destination'] = null;
             }
         }
 
