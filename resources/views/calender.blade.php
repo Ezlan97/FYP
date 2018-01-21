@@ -141,13 +141,13 @@ footer {
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							{{ Form::label('_title', 'Event Title') }}
-							{{ Form::text('_title', old('_title'), ['class' => 'form-control', 'readonly']) }}
+							{{ Form::label('_event_title', 'Event Title') }}
+							{{ Form::text('_event_title', old('_event_title'), ['class' => 'form-control', 'readonly']) }}
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('_destination', 'Destination') }}
-							{{ Form::textarea('_destination', old('_destination'), ['class' => 'form-control', 'readonly']) }}
+							{{ Form::label('_title', 'Vehicle') }}
+							{{ Form::text('_title', old('_title'), ['class' => 'form-control', 'readonly']) }}
 						</div>
 
 						<div class="form-group">
@@ -249,6 +249,7 @@ footer {
                 	$('#modal-event #delete').attr('data-id', event.id);
                 	$('#modal-event #_title').val(event.title);
                 	$('#modal-event #_destination').val(event.destination);
+                	$('#modal-event #_event_title').val(event.event_title);
                 	$('#modal-event #_desc').val(event.desc);
                 	$('#modal-event #_date_start').val(date_start);
                 	$('#modal-event #_time_start').val(time_start);

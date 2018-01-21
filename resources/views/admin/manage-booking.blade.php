@@ -50,8 +50,8 @@
 								<th> User Name </th>
 								<th> Position </th>
 								<th> Car Model </th>
+								<th> Event Title </th>
 								<th> Destination </th>
-								<th> Purpose </th>
 								<th> Passenger </th>
 								<th> Departure Date </th>
 								<th> Return Date </th>
@@ -72,8 +72,8 @@
 								<td> {{ $history->name }} </td>
 								<td> {{ $history->position }} </td>
 								<td> {{ $history->title }} </td>
+								<td> {{ $history->event_title }} </td>
 								<td> {{ $history->destination }} </td>
-								<td> {{ $history->purpose }} </td>
 								<td class="text-center"> {{ $history->total_passenger }} </td>
 								<td> {{ date('M j, Y H:i a', strtotime( $history->start_date )) }} </td>
 								<td> {{ date('M j, Y H:i a', strtotime( $history->end_date )) }} </td>
@@ -196,6 +196,13 @@
 					{{-- Journey Info --}}
 					<h4 class="text-center col-md-12" style="font-weight:bold;">Journey Info</h4>
 					<p></p>
+
+					<div class="form-group col-md-12">
+						<label for="inputPassword1" class="col-md-4 control-label">Event Title :</label>
+						<div class="col-md-8">
+							<p>{{ $history->event_title }}</p>
+						</div>
+					</div>
 
 					<div class="form-group col-md-12">
 						<label for="inputPassword1" class="col-md-4 control-label">Destination :</label>

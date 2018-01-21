@@ -42,6 +42,7 @@
 						<thead>
 							<tr class="uppercase">
 								<th> # </th>
+								<th> Event Title </th>
 								<th> Destination </th>
 								<th> Purpose </th>
 								<th> Departure Date </th>
@@ -58,6 +59,7 @@
 							<?php $currentPageTotalNumber = ($histories->currentPage() - 1) * 5; ?>
 							<tr>
 								<td><b>{{$count + $currentPageTotalNumber}}</b></td>
+								<td> {{ $history->event_title }} </td>
 								<td> {{ $history->destination }}</td>
 								<td> {{ $history->purpose }}</td>
 								<td> {{ date('M j, Y H:i a', strtotime( $history->start_date )) }} </td>
@@ -86,7 +88,8 @@
 							<td>
 								<a href="" class="btn btn-primary editBtn" data-toggle="modal" data-target="#editModal" data-history_id="{{ $history->history_id }}" 
 									data-history_destination="{{ $history->destination }}" 
-									data-history_purpose="{{ $history->purpose }}" 
+									data-history_purpose="{{ $history->purpose }}"
+									data-history_event_title="{{ $history->event_title }}" 
 									data-history_start="{{ $history->start_date }}" 
 									data-history_end="{{ $history->end_date }}"
 									data-history_attachment="{{ $history->attachment }}"
@@ -200,6 +203,12 @@
 				<div class="row">
 					{!! Form::open(['method'=>'POST', 'action'=>'UserController@update', 'files'=>true]) !!}
 					<div class="form-group col-md-12">
+						<label for="inputPassword1" class="col-md-4 control-label">Event Title</label>
+						<div class="col-md-8">
+							<input type="text" name="event_title" class="form-control input-line" id="m_history_event_title">
+						</div>
+					</div>
+					<div class="form-group col-md-12">
 						<label for="inputPassword1" class="col-md-4 control-label">Destination</label>
 						<div class="col-md-8">
 							<textarea type="text" name="destination" class="form-control input-line" id="m_history_destination"></textarea>
@@ -298,6 +307,7 @@
 		var faculties_id = $(this).data('faculties_id');
 		$("#m_history_id").val($(this).data('history_id'));
 		$("#m_history_purpose").val($(this).data('history_purpose'));
+		$("#m_history_event_title").val($(this).data('history_event_title'));
 		$("#m_history_destination").val($(this).data('history_destination'));
 		$("#m_history_total_passenger").val($(this).data('history_total_passenger'));
 		$("#m_history_start").val($(this).data('history_start'));

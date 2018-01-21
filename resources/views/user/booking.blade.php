@@ -43,6 +43,10 @@
 				<input type="text" value="{{ Auth::user()->faculty }}" class="form-control" name="faculty" readonly="">
 			</div>
 			<div class="form-group col-md-10 col-md-offset-1">
+				<label for="name">Event Title:</label>
+				<input name="event_title" class="form-control" required>
+			</div>
+			<div class="form-group col-md-10 col-md-offset-1">
 				<label for="name">Purpose:</label>
 				<select class="form-control" name="purpose">
 					<option value="Conference">Conference</option>

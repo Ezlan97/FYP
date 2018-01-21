@@ -17,6 +17,7 @@ class CreateBookingHistoriesTable extends Migration
             $table->integer('user_id');
             $table->string('position');
             $table->string('faculty');
+            $table->string('event_title');
             $table->integer('car_id')->nullable();
             $table->integer('attachment_id');
             $table->datetime('start_date');
