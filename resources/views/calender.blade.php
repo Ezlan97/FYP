@@ -151,7 +151,7 @@ footer {
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('_date_start', 'Event Date') }}
+							{{ Form::label('_date_start', 'Event Start Date') }}
 							{{ Form::text('_date_start', old('_date_start'), ['class' => 'form-control', 'readonly' => 'true']) }}
 						</div>
 

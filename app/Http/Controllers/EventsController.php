@@ -18,7 +18,7 @@ class EventsController extends Controller
     {      
 
         //Query to select booking history based on current logged on user id
-        $data = vehicle::select('booking_histories.destination', 'booking_histories.car_id', 'booking_histories.event_title', 'vehicles.title', 'vehicles.start', 'vehicles.end', 'vehicles.color')
+        $data = vehicle::select('booking_histories.destination', 'booking_histories.car_id', 'booking_histories.event_title', 'booking_histories.start_date as start', 'booking_histories.end_date as end', 'vehicles.title', 'vehicles.color')
         ->leftJoin('booking_histories', 'booking_histories.car_id', '=', 'vehicles.id')
         ->get();
 
