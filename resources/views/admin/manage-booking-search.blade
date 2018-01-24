@@ -1,31 +1,42 @@
 @extends('layouts.master')
+
 @section('head')
+
 @stop
+
 @section('content')
 <header class="masthead">
 	<div class="overlay">
 		<div class="container">
-			<h1 style="color: #ffffff; font-size: 60px;">Welcome {{ Auth::user()->name }}</h1>
-			<h2 class="display-4 text-white" style="color: #ffffff;">Start Booking Now</h2>
+			<h1 style="color: #ffffff; font-size: 60px;">Manage Booking</h1>
+			<h2 class="display-4 text-white"></h2>
 		</div>
 	</div>
 </header>
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="/homepage">Home</a></li>
-	<li class="breadcrumb-item"><a href="{{ url('login') }}">Login</a></li>
-	<li class="breadcrumb-item active">Booking</li>
+	<li class="breadcrumb-item">Login</li>
+	<li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+	<li class="breadcrumb-item">Manage Booking</li>
 </ol>
-<div class="container" style="padding-top: 80px; padding-bottom: 80px;">
+<div class="col-md-6 col-md-offset-3">
+	<form action="{{ route('admin.search-booking') }}" method="POST">
+		{{ csrf_field() }}
+		<input id="search" name="search" type="text" class="form-control" placeholder="Search By Event Title">
+	</form>
+</div>
+<div class="row" style="padding-top: 60px; padding-bottom: 60px;">
 	<div class="col-md-10 col-md-offset-1 well">
 		<!-- BEGIN BORDERED TABLE PORTLET-->
 		<div class="portlet box blue-dark">
 			<div class="portlet-title">
 				<div class="caption">
-					<h3 class="text-center">Booking History</h3>
+					<i class="icon-calendar font-white"></i>
+					<span class="caption-subject font-white sbold uppercase">Booking Management</span>
 				</div>
 			</div>
 			<div class="portlet-body">
-				<div class="col-md-10 margin-bottom-15px padding-left-0px">
+				<div class="col-md-12 margin-bottom-15px padding-left-0px">
 					<div class="col-md-3 padding-left-0px">
 						<select class="form-control input-sm" id="filter_status" name="filter_status" onchange="myFunction()" placeholder="Filter Status">
 							<option value="">Filter Status</option>
@@ -35,99 +46,97 @@
 							<option value="2">Rejected</option>
 						</select>
 					</div>
-					
 				</div>
+
 				<div class="table-scrollable table-bordered table-hover">
 					<table class="table table-hover table-light">
 						<thead>
 							<tr class="uppercase">
 								<th> # </th>
+								<th> User Name </th>
+								<th> Position </th>
+								<th> Car Model </th>
 								<th> Event Title </th>
 								<th> Destination </th>
-								<th> Purpose </th>
+								<th> Passenger </th>
 								<th> Departure Date </th>
 								<th> Return Date </th>
+								<th> File </th>
+								<th>Action</th>
 								<th> Status </th>
 								<th> Remarks </th>
 								<th> Summary </th>
-								<th> </th>
 							</tr>
 						</thead>
-						<tbody>
-							<?php $count = 1; ?>
-							@if(count($histories) > 0)
+						<tbody id="tbody">
 							@foreach($histories as $history)
-							<?php $currentPageTotalNumber = ($histories->currentPage() - 1) * 5; ?>
 							<tr>
-								<td><b>{{$count + $currentPageTotalNumber}}</b></td>
+								<td><b>{{$count + $currentPageTotalNumber}} </b></td>
+								<td> {{ $history->name }} </td>
+								<td> {{ $history->position }} </td>
+								<td> {{ $history->title }} </td>
 								<td> {{ $history->event_title }} </td>
-								<td> {{ $history->destination }}</td>
-								<td> {{ $history->purpose }}</td>
+								<td> {{ $history->destination }} </td>
+								<td class="text-center"> {{ $history->total_passenger }} </td>
 								<td> {{ date('M j, Y H:i a', strtotime( $history->start_date )) }} </td>
 								<td> {{ date('M j, Y H:i a', strtotime( $history->end_date )) }} </td>
 								<td>
-									<span
+									<a class="btn btn-sm btn-success" href="{{ $directory.$history->filepath }}" download>
+										Download
+									</a>
+								</td>
+								<td>
+									<a href="{{ route('admin.approve-reject-confirmation', $history->history_id ) }}" class="btn btn-sm btn-warning">Approve | Reject</a>
+								</td>
+								<td>
+									<span 
 									class="label min-width-100px
 									@if( $history->approval == 2) {{ 'label-danger' }}
 									@elseif ($history->approval == 0){{ 'label-default' }}
 									@elseif ($history->approval == 1){{ 'label-success' }}
 									@else {{ 'label-danger' }}
 									@endif">
+
 									@if( $history->approval == 2) {{ 'Rejected' }}
 									@elseif ($history->approval == 0){{ 'Pending' }}
 									@elseif ($history->approval == 1){{ 'Approved' }}
 									@else {{ 'Rejected' }}
 									@endif
+
 								</span>
 							</td>
 							<td>
-								<a class="btn btn-primary" data-toggle="modal" data-target="#remarksModal{{ $history->history_id }}">
-									<i class="fa fa-list"></i>
+								{{ $history->remarks }}
+							</td>
+							<td>
+								<a class="btn btn-sm btn-primary btnPrint1" data-toggle="modal" data-target="#summaryModal{{ $history->history_id }}">
 									View
 								</a>
 							</td>
-							<td>
-								<a class="btn btn-success btnPrint1" data-toggle="modal" data-target="#summaryModal{{ $history->history_id }}">
-									View 
-								</a>
-							</td>
-							<td>
-								<a href="" class="btn btn-warning editBtn" data-toggle="modal" data-target="#editModal" data-history_id="{{ $history->history_id }}" 
-									data-history_destination="{{ $history->destination }}" 
-									data-history_purpose="{{ $history->purpose }}"
-									data-history_event_title="{{ $history->event_title }}" 
-									data-history_start="{{ $history->start_date }}" 
-									data-history_end="{{ $history->end_date }}"
-									data-history_attachment="{{ $history->attachment }}"
-									data-history_total_passenger="{{ $history->total_passenger }}">
-									<i class="fa fa-list">Edit</i>
-								</a>
-							</td>
 						</tr>
-						<?php $count++ ?>
 						@endforeach
-						@endif
 					</tbody>
 				</table>
 			</div>
 		</div>
-		<div class="col-md-12">
-			<div class="pull-right">
-				{{$histories->render()}}
-			</div>
-		</div>
 	</div>
 	<!-- END BORDERED TABLE PORTLET-->
-	<div class="col-md-7 text-center">
-		<a href="" class="btn btn-sm green-jungle pull-right" id="createButton" data-toggle="modal" data-target="#createModal"><button class="btn btn-lg btn-success">Book Now</button></a>
+	<div class="row">
+		<div class="col-md-6">
+			{{$histories->render()}}
+		</div>
+		<div class="col-md-6">
+		</div>
 	</div>
+</div> 
 </div>
-</div>
+
 
 
 
 
 {{-- MODAL --}}
+
 
 
 
@@ -284,7 +293,6 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-primary" onclick="window.print();">Print</button>
 			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		</div>
 	</div>
@@ -294,47 +302,53 @@
 @endforeach
 <!-- End Modal -->
 
-<!-- Booking Modal -->
-<div id="createModal" class="modal fade" role="dialog">
+<!-- Modal -->
+<div id="vehicleModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
+
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Choose Departure and Return Date</h4>
+				<h4 class="modal-title">Vehicle Info</h4>
 			</div>
 			<div class="modal-body">
-				<div class="table-scrollable table-scrollable-borderless">
-					{!! Form::open(['method'=>'POST', 'action'=>'UserController@showAvailableBooking', 'files'=>true]) !!}
+				<div class="row">
+
 					<div class="form-group col-md-12">
-						<label for="inputPassword1" class="col-md-4 control-label">Departure date</label>
+						<label for="inputPassword1" class="col-md-4 control-label">Model</label>
 						<div class="col-md-8">
-							<input type="text" name="start_date" class="form-control input-line" id="date_start">
+							<input type="text" name="title" class="form-control input-line" id="m_vehicle_model" disabled>
 						</div>
 					</div>
 					<div class="form-group col-md-12">
-						<label for="inputPassword1" class="col-md-4 control-label">Return date</label>
+						<label for="inputPassword1" class="col-md-4 control-label">Plate</label>
 						<div class="col-md-8">
-							<input type="text" name="end_date" class="form-control input-line" id="date_end">
+							<input type="text" name="plate" class="form-control input-line" id="m_vehicle_plate" disabled>
 						</div>
 					</div>
+					<div class="form-group col-md-12">
+						<label for="inputPassword1" class="col-md-4 control-label">Type</label>
+						<div class="col-md-8">
+							<input type="text" name="type" class="form-control input-line" id="m_vehicle_type" disabled>
+						</div>
+					</div>
+
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-success submitDate"> Submit </button>
-				<button type="button" class="btn btn-danger btn-warning" data-dismiss="modal">Close</button>
-				{!! Form::close() !!}
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>
+
 	</div>
 </div>
-<!-- End modal -->
+<!-- End Modal -->
 
-
-<!-- Remark Modal -->
-@foreach($histories as $history)
-<div id="remarksModal{{ $history->history_id }}" class="modal fade" role="dialog">
+<!-- Modal -->
+<div id="remarksModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
+
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
@@ -343,144 +357,78 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
+
 					<div class="form-group col-md-12">
-						<p>{{ $history->remarks }}</p>
+						<textarea id="m_remarks" class="form-control" readonly=""></textarea>
 					</div>
+
 				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>
-	</div>
-</div>
-@endforeach
-<!-- End Modal -->
 
-
-<!-- Update Modal -->
-<div id="editModal" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Update Booking</h4>
-			</div>
-			<div class="modal-body">
-				<div class="row">
-					{!! Form::open(['method'=>'POST', 'action'=>'UserController@update', 'files'=>true]) !!}
-					<div class="form-group col-md-12">
-						<label for="inputPassword1" class="col-md-4 control-label">Event Title</label>
-						<div class="col-md-8">
-							<input type="text" name="event_title" class="form-control input-line" id="m_history_event_title">
-						</div>
-					</div>
-					<div class="form-group col-md-12">
-						<label for="inputPassword1" class="col-md-4 control-label">Destination</label>
-						<div class="col-md-8">
-							<textarea type="text" name="destination" class="form-control input-line" id="m_history_destination"></textarea>
-						</div>
-					</div>
-					<div class="form-group col-md-12">
-						<label for="inputPassword1" class="col-md-4 control-label">Purpose</label>
-						<div class="col-md-8">
-							<input type="text" name="purpose" class="form-control input-line" id="m_history_purpose">
-						</div>
-					</div>
-					<div class="form-group col-md-12">
-						<label for="inputPassword1" class="col-md-4 control-label">Total Passanger</label>
-						<div class="col-md-8">
-							<input type="text" name="total_passenger" class="form-control input-line" id="m_history_total_passenger">
-						</div>
-					</div>
-					<div class="form-group col-md-12">
-						<label for="inputPassword1" class="col-md-4 control-label">Start Date</label>
-						<div class="col-md-8">
-							<input type="text" name="start_date" class="form-control input-line" placaeholder="m_history_start" id="date_start1">
-						</div>
-					</div>
-					<div class="form-group col-md-12">
-						<label for="inputPassword1" class="col-md-4 control-label">End Date</label>
-						<div class="col-md-8">
-							<input type="text" name="end_date" class="form-control input-line" placaeholder="m_history_end" id="date_end2">
-						</div>
-					</div>
-					<div class="form-group col-md-12">
-						<label for="inputPassword1" class="col-md-4 control-label">Documents</label>
-						<div class="col-md-8">
-							<input class="form-control input-line input-medium" type="file" name="attachment" id="fileToUpload">
-							<small id="passwordHelpBlock" class="form-text text-muted">
-								Optional
-							</small>
-						</div>
-					</div>
-					<div class="form-group">
-						<input type="hidden" name="id" id="m_history_id">
-						<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-						<input type="hidden" name="car_id" value="0">
-						<input type="hidden" name="remarks" value="">
-						<input type="hidden" name="approval" value="0">
-						<input type="hidden" name="attachment_id" id="m_history_attachment">
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary">Update</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					{!! Form::close() !!}
-				</div>
-			</div>
-		</div>
 	</div>
 </div>
 <!-- End Modal -->
+
 
 
 @stop
+
 @section('script')
+
+<script src="../../assets/global/plugins/icheck/icheck.min.js"></script>
+
+<script src="../../assets/admin/pages/scripts/form-icheck.js"></script>
+
+<script> FormiCheck.init();  </script>
+
 <script>
-	
 	function myFunction() {
-		
 		if($('#filter_status').val() == ''){
-			window.location.href = '/user';
+			window.location.href = '/admin/manage-booking';
 		}
 		else{
-			window.location.href = '/user?status=' + $( "#filter_status" ).val();
+			window.location.href = '/admin/manage-booking/?status=' + $( "#filter_status" ).val();
 		}
 	}
 
 	$(document).ready(function(){
-
-		$(".submitDate").click(function(event){
-			var isValid = true;
-			if($('#e_date').val() == '' || $('#s_date').val() == '')
-			{
-				$('#createModal').modal('toggle');
-				swal(
-					'',
-					"Please select date!",
-					'error'
-					)
-				isValid = false;
+		$('#checkall-checkbox').click(function(){
+			if(this.checked){
+				$('.checker').find('span').addClass('checked');
+				$("input.single-checkbox").prop('checked', true).show();
 			}
-			if (!isValid) {
-				event.preventDefault();
+			else{
+				$('.checker').find('span').removeClass('checked');
+				$("input.single-checkbox").prop('checked', false);
 			}
 		});
-	});
 
-	$('.editBtn').click(function(){
-		var roles_id = $(this).data('roles_id');
-		var faculties_id = $(this).data('faculties_id');
-		$("#m_history_id").val($(this).data('history_id'));
-		$("#m_history_purpose").val($(this).data('history_purpose'));
-		$("#m_history_event_title").val($(this).data('history_event_title'));
-		$("#m_history_destination").val($(this).data('history_destination'));
-		$("#m_history_total_passenger").val($(this).data('history_total_passenger'));
-		$("#m_history_start").val($(this).data('history_start'));
-		$("#m_history_end").val($(this).data('history_end'));
-		$("#m_history_attachment").val($(this).data('history_attachment'));
+		$('.showUser').click(function(){
+			var faculty = $(this).data('faculty');
+
+			$("#m_user_id").val($(this).data('user_id'));
+			$("#m_username").val($(this).data('username'));
+			$("#m_email").val($(this).data('user_email'));
+			$("#m_matrik").val($(this).data('matrik'));
+			$("#m_phone").val($(this).data('phone'));
+			$("#m_faculty").val(faculty);
+
+		});
+
+		$('.showVehicle').click(function(){
+
+			$("#m_vehicle_model").val($(this).data('vehicle_model'));
+			$("#m_vehicle_plate").val($(this).data('vehicle_plate'));
+			$("#m_vehicle_type").val($(this).data('vehicle_type'));
+		});
+
+		$('.showRemarks').click(function(){
+			$("textarea#m_remarks").val($(this).data('remarks'));
+		});
 	});
 
 	$().ready(function () {
@@ -496,7 +444,9 @@
 			$('body').removeClass('modalprinter');
 		});
 	});
+
 </script>
+
 @if(Session::has('message'))
 <script>
 	swal(
@@ -506,5 +456,8 @@
 		)
 	</script>
 	@endif
+
 	@include('errors.validation-errors')
+	@include('errors.validation-errors-script')
+
 	@stop

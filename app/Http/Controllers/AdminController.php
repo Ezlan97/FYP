@@ -177,13 +177,13 @@ class AdminController extends Controller
 
         //Get all booking history of vehicle based on vehicle id
         $histories = booking_history::select('users.name', 'users.email','booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date','booking_histories.created_at', 'booking_histories.approval', 'booking_histories.destination', 'booking_histories.event_title', 'booking_histories.purpose', 'attachments.filepath', 'vehicles.title')
-            ->leftJoin('users', 'booking_histories.user_id', '=', 'users.id')
-            ->join('vehicles', 'vehicles.id', '=', 'booking_histories.car_id')
-            ->join('attachments', 'booking_histories.attachment_id', '=', 'attachments.id');
+        ->leftJoin('users', 'booking_histories.user_id', '=', 'users.id')
+        ->join('vehicles', 'vehicles.id', '=', 'booking_histories.car_id')
+        ->join('attachments', 'booking_histories.attachment_id', '=', 'attachments.id');
 
         $histories = $histories->where('booking_histories.car_id', $vehicle_id)
-                                ->orderBy('booking_histories.id', 'DESC')
-                                ->paginate(5);
+        ->orderBy('booking_histories.id', 'DESC')
+        ->paginate(5);
 
         return view('admin.view-vehicle-history', compact('histories', 'directory', 'vehicle')); 
         
@@ -201,9 +201,9 @@ class AdminController extends Controller
 
         //Get all booking histories info
         $histories = booking_history::select('users.name', 'users.email', 'users.position', 'users.matrik', 'users.phone', 'users.faculty', 'booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date','booking_histories.remarks','booking_histories.created_at', 'booking_histories.approval', 'booking_histories.event_title', 'booking_histories.total_passenger', 'booking_histories.destination', 'booking_histories.purpose', 'attachments.filepath', 'vehicles.title', 'vehicles.plate', 'vehicles.type')
-            ->leftJoin('users', 'booking_histories.user_id', '=', 'users.id')
-            ->leftJoin('vehicles', 'vehicles.id', '=', 'booking_histories.car_id')
-            ->join('attachments', 'booking_histories.attachment_id', '=', 'attachments.id');
+        ->leftJoin('users', 'booking_histories.user_id', '=', 'users.id')
+        ->leftJoin('vehicles', 'vehicles.id', '=', 'booking_histories.car_id')
+        ->join('attachments', 'booking_histories.attachment_id', '=', 'attachments.id');
 
         //If request has status @ filter
         if(request()->has('status')){
@@ -220,14 +220,14 @@ class AdminController extends Controller
         if($checkSearch == 0){
 
             $histories = $histories->orderBy('booking_histories.id', 'DESC')
-                                    ->paginate(5);
+            ->paginate(5);
 
             return view('admin.manage-booking', compact('histories', 'directory')); 
         }
         //Else, append the query of search/filter
         else{
             $histories = $histories->orderBy('booking_histories.id', 'DESC')
-                                    ->paginate(5)->appends($queries);
+            ->paginate(5)->appends($queries);
 
             return view('admin.manage-booking', compact('histories', 'directory')); 
         }
@@ -285,11 +285,11 @@ class AdminController extends Controller
 
         //Get all booking histories info
         $histories = booking_history::select('users.name', 'users.email', 'users.matrik', 'users.phone', 'users.faculty', 'booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date','booking_histories.remarks','booking_histories.created_at', 'booking_histories.approval', 'booking_histories.total_passenger', 'booking_histories.event_title', 'booking_histories.destination', 'booking_histories.purpose', 'attachments.filepath', 'vehicles.title', 'vehicles.plate', 'vehicles.type')
-            ->leftJoin('users', 'booking_histories.user_id', '=', 'users.id')
-            ->leftJoin('vehicles', 'vehicles.id', '=', 'booking_histories.car_id')
-            ->join('attachments', 'booking_histories.attachment_id', '=', 'attachments.id')
-            ->where('booking_histories.id', '=', $booking_id)
-            ->first();
+        ->leftJoin('users', 'booking_histories.user_id', '=', 'users.id')
+        ->leftJoin('vehicles', 'vehicles.id', '=', 'booking_histories.car_id')
+        ->join('attachments', 'booking_histories.attachment_id', '=', 'attachments.id')
+        ->where('booking_histories.id', '=', $booking_id)
+        ->first();
 
 
         //Get start date and end date
@@ -303,14 +303,14 @@ class AdminController extends Controller
         #Select only vehicle that NOT IN booked date AND approval is 0[Pending] and 1[Approved] P.S / You cant booked vehicle that already in pending and approved status, but only on rejected status
 
         $not_available_car_objs = DB::select(DB::raw("SELECT booking_histories.car_id FROM booking_histories
-                                                        WHERE
-                                                        (
-                                                            (booking_histories.start_date <= '$start_date' AND booking_histories.end_date >= '$start_date') OR 
-                                                            (booking_histories.start_date <= '$end_date' AND booking_histories.end_date >= '$end_date') OR 
-                                                            (booking_histories.start_date >= '$start_date' AND booking_histories.end_date <= '$end_date')
-                                                        )
-                                                        AND
-                                                        (booking_histories.approval = 0 OR booking_histories.approval = 1)"));
+            WHERE
+            (
+            (booking_histories.start_date <= '$start_date' AND booking_histories.end_date >= '$start_date') OR 
+            (booking_histories.start_date <= '$end_date' AND booking_histories.end_date >= '$end_date') OR 
+            (booking_histories.start_date >= '$start_date' AND booking_histories.end_date <= '$end_date')
+            )
+            AND
+            (booking_histories.approval = 0 OR booking_histories.approval = 1)"));
 
         $not_available_car = array();
 
@@ -322,5 +322,57 @@ class AdminController extends Controller
 
         return view('admin.approve_reject_confirmation', compact('available_bookings', 'directory', 'start_date', 'end_date', 'histories'));
     }
+
+    public function search (Request $request, booking_history $input) {
+
+        $input = $request->search;
+
+      //Variable to check if there's search/filter
+        $checkSearch = 0;
+        $queries = [];
+
+        //Directory of attachment @ thisprojecttitle/public/attachment/
+        $directory = '/attachment/';
+
+        //Get all booking histories info
+        $histories = booking_history::select('users.name', 'users.email', 'users.position', 'users.matrik', 'users.phone', 'users.faculty', 'booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date','booking_histories.remarks','booking_histories.created_at', 'booking_histories.approval', 'booking_histories.event_title', 'booking_histories.total_passenger', 'booking_histories.destination', 'booking_histories.purpose', 'attachments.filepath', 'vehicles.title', 'vehicles.plate', 'vehicles.type')
+        ->leftJoin('users', 'booking_histories.user_id', '=', 'users.id')
+        ->leftJoin('vehicles', 'vehicles.id', '=', 'booking_histories.car_id')
+        ->join('attachments', 'booking_histories.attachment_id', '=', 'attachments.id')
+        ->where('event_title', 'LIKE', '%'.$input.'%')->get();
+
+        // return $histories;
+
+        return view('admin.manage-booking-search', compact('histories', 'directory')); 
+
+
+        // //If request has status @ filter
+        // if(request()->has('status')){
+        //     // //Add query where approval = searched status
+        //     // $histories = $histories->where('booking_histories.approval', '=', request('status'));
+
+        //     // $queries['status'] = request('status');
+
+        //     // //Increase the count of check search to record there's search in request
+        //     // $checkSearch++;
+        // }
+
+        // //If no search/filter, then apply this query
+        // if($checkSearch == 0){
+
+        //     // $histories = $histories->orderBy('booking_histories.id', 'DESC')
+        //     // ->paginate(5)->get();
+
+        //     return view('admin.manage-booking', compact('histories', 'directory')); 
+        // }
+        // //Else, append the query of search/filter
+        // else{
+        //     // $histories = $histories->appends($queries)->get();
+        //     // return $histories;
+
+        //     return view('admin.manage-booking', compact('histories', 'directory')); 
+        // }
+
+  }
 
 }

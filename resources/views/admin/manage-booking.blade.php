@@ -292,7 +292,6 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-primary" onclick="window.print();">Print</button>
 			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		</div>
 	</div>
@@ -432,17 +431,17 @@
 	});
 
 	$().ready(function () {
-    $('.modal.printable').on('shown.bs.modal', function () {
-        $('.modal-dialog', this).addClass('focused');
-        $('body').addClass('modalprinter');
+		$('.modal.printable').on('shown.bs.modal', function () {
+			$('.modal-dialog', this).addClass('focused');
+			$('body').addClass('modalprinter');
 
-        if ($(this).hasClass('autoprint')) {
-            window.print();
-        }
-    }).on('hidden.bs.modal', function () {
-        $('.modal-dialog', this).removeClass('focused');
-        $('body').removeClass('modalprinter');
-    });
+			if ($(this).hasClass('autoprint')) {
+				window.print();
+			}
+		}).on('hidden.bs.modal', function () {
+			$('.modal-dialog', this).removeClass('focused');
+			$('body').removeClass('modalprinter');
+		});
 	});
 
 </script>

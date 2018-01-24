@@ -71,7 +71,7 @@ class UserController extends Controller
     public function index(){
 
         //Query to select booking history based on current logged on user id
-        $histories = booking_history::select('users.name', 'users.email','booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date', 'booking_histories.event_title', 'booking_histories.created_at', 'booking_histories.approval', 'booking_histories.destination', 'booking_histories.total_passenger', 'booking_histories.remarks', 'booking_histories.purpose', 'attachments.filepath', 'booking_histories.attachment_id as attachment', 'vehicles.title')
+        $histories = booking_history::select('users.name', 'users.email' , 'users.position','booking_histories.id as history_id', 'booking_histories.start_date','booking_histories.end_date', 'booking_histories.event_title', 'booking_histories.created_at', 'booking_histories.approval', 'booking_histories.destination', 'booking_histories.total_passenger', 'booking_histories.remarks', 'booking_histories.purpose', 'attachments.filepath', 'booking_histories.attachment_id as attachment', 'vehicles.title')
             ->leftJoin('users', 'booking_histories.user_id', '=', 'users.id')
             ->leftJoin('vehicles', 'vehicles.id', '=', 'booking_histories.car_id')
             ->join('attachments', 'booking_histories.attachment_id', '=', 'attachments.id')

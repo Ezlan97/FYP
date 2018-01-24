@@ -160,7 +160,7 @@
 				<div class="copyrights">
 					<div class="row">
 						<div class="col-sm-6">
-							<p>&copy; 2017 Kuis Transportation Booking System. All rights reserved.</p>
+							<p>&copy; 2018 Kuis Transportation Booking System. All rights reserved.</p>
 						</div>
 						<div class="col-sm-6 text-right">
 							<p>Created
