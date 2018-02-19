@@ -339,11 +339,11 @@ class AdminController extends Controller
         ->leftJoin('users', 'booking_histories.user_id', '=', 'users.id')
         ->leftJoin('vehicles', 'vehicles.id', '=', 'booking_histories.car_id')
         ->join('attachments', 'booking_histories.attachment_id', '=', 'attachments.id')
-        ->where('event_title', 'LIKE', '%'.$input.'%')->get();
+        ->where('event_title', 'LIKE', '%'.$input.'%')->paginate(5);
 
         // return $histories;
 
-        return view('admin.manage-booking-search', compact('histories', 'directory')); 
+        return view('admin.manage-booking', compact('histories', 'directory')); 
 
 
         // //If request has status @ filter

@@ -19,6 +19,19 @@
 	<li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
 	<li class="breadcrumb-item">Manage Booking</li>
 </ol>
+<form class="form-horizontal" method="POST" action="{{ route('admin.search-booking') }}">
+	{{ csrf_field() }}
+	<div class="container">
+		<div class="input-group">
+			<input type="search" name="search" class="form-control" placeholder="Search by event title">
+			<span class="input-group-btn">
+				<button type="submit" class="btn btn-primary">
+					Search
+				</button>
+			</span>
+		</div>
+	</div>
+</form>
 <div class="row" style="padding-top: 60px; padding-bottom: 60px;">
 	<div class="col-md-10 col-md-offset-1 well">
 		<!-- BEGIN BORDERED TABLE PORTLET-->
