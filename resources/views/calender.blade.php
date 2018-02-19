@@ -25,6 +25,36 @@ body {
 	}
 }
 
+.fc td.fc-today {
+    background-color: LightGray;
+}
+
+.fc-title {
+    color: Black;
+}
+
+.fc-time {
+    color: Black;
+}
+
+.alert-info {
+    color: Black;
+    background-color: DOdgerBlue;
+    border-color: #bce8f1;
+}
+
+.alert-danger {
+    color: Black;
+    background-color: Tomato;
+    border-color: #ebccd1;
+}
+
+.alert-success {
+    color: Black;
+    background-color: MediumSeaGreen;
+    border-color: #d6e9c6;
+}
+
 .nav.navbar-nav {
 	display: flex;
 	justify-content: center;

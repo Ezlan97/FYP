@@ -166,9 +166,9 @@
 							<div class="col-md-8">
 								<select class="form-control" name="color" id="vplate" value="{{ old('type') }}" required>
 									<option value="" disabled selected>Select</option>
-									<option value="#87CEFA" style="background:#87CEFA; color: #ffffff;">Car</option>
-									<option value="#FFB6C1" style="background:#FFB6C1; color: #ffffff;">Bus</option>
-									<option value="#7FFFD4" style="background:#7FFFD4; color: #ffffff;">Van</option>
+									<option value="DodgerBLue" style="background:DodgerBlue color: #ffffff;">Car</option>
+									<option value="Tomato" style="background:Tomato; color: #ffffff;">Bus</option>
+									<option value="MediumSeaGreen" style="background:MediumSeaGreen; color: #ffffff;">Van</option>
 								</select>
 							</div>
 						</div>
